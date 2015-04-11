@@ -7,13 +7,13 @@ class Enseignant(models.Model):
 	prenom = models.CharField(max_length = 100)
 	grade = models.CharField(max_length = 100)
 	service_du = models.IntegerField (default = 192)
-	decharge = models.IntegerField (default = 192)
+	decharge = models.IntegerField (default = 0)
 	commentaire = models.TextField
 	arrivé_en = models.DateField
 	photo = models.ImageField
 
-	def ___str___(self):
-		return self.nom_text, self.prenom_text
+	def __str__(self):
+		return ('{0}, {1}'.format(self.nom, self.prenom))
 
 
 class Ue(models.Model):
@@ -25,8 +25,8 @@ class Ue(models.Model):
 	responsable = models.ForeignKey(Enseignant)
 	specialité = models.CharField(max_length = 20)
 
-	def ___str___(self):
-		return self.code, self. titre
+	def __str__(self):
+		return ('{0}, {1}'.format(self.code, self.titre))
 
 
 class Tache(models.Model):
@@ -37,5 +37,5 @@ class Tache(models.Model):
 	horaire_eqtd = models.IntegerField
 	modifié_le = models. DateTimeField(auto_now = True)
 	
-	def ___str___(self):
-		return self.ue_text, self.nature_text
+	def __str__(self):
+		return ('{0}, {1}'.format(self.ue, self.nature))
