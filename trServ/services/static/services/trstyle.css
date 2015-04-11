@@ -1,8 +1,26 @@
 body{
 	background-color: #000;
-	color: #FFF;
+	color: #ccc;
 }
 
 h1{
 	color: #FF0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td{
+	border: 1px solid #666;
+	width: 120px;
+	text-align: center;
+}
+
+
+th{
+	border: 1px solid #666;
+	width: 120px;
+	text-decoration: bold;
+	color:#fff;
 }

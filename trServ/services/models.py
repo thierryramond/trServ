@@ -11,6 +11,7 @@ class Enseignant(models.Model):
 	commentaire = models.TextField
 	arrivé_en = models.DateField
 	photo = models.ImageField
+	attribué = models.IntegerField (default = 0)
 
 	def __str__(self):
 		return ('{0}, {1}'.format(self.nom, self.prenom))

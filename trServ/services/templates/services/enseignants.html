@@ -13,7 +13,17 @@
 
 
 La date actuelle est : {{date}}
+<br/><br/>
+
 <table>
+<tr>
+	<th> Nom</th>
+	<th> Prénom</th>
+	<th> Grade</th>
+	<th> Service théorique</th>
+	<th> Décharge </th>
+	<th> Service actuel </th>
+</tr>
 {% for enseignant in Enseignants %}
 <tr>
 	<td>
@@ -21,6 +31,18 @@ La date actuelle est : {{date}}
 	</td>
 	<td>
 		{{enseignant.prenom }}
+	</td>
+	<td>
+		{{enseignant.grade}}
+	</td>
+	<td>
+		{{enseignant.service_du}}
+	</td>
+	<td>
+		{{enseignant.decharge}}
+	</td>
+	<td>
+		{{enseignant.attribué}}
 	</td>
 </tr>
 {% endfor %}	
