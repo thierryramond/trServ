@@ -8,9 +8,9 @@ class Enseignant(models.Model):
 	grade = models.CharField(max_length = 100)
 	service_du = models.IntegerField (default = 192)
 	decharge = models.IntegerField (default = 0)
-	commentaire = models.TextField()
+	commentaire = models.TextField(blank=True)
 	arrivé_en = models.DateField()
-	photo = models.ImageField()
+	photo = models.ImageField(blank=True)
 	attribué = models.IntegerField (default = 0)
 
 	def __str__(self):

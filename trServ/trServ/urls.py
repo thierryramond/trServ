@@ -8,7 +8,9 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accueil/', 'services.views.home'),
-    url(r'enseignants/', 'services.views.liste_enseignants'),
-    url(r'ue/', 'services.views.liste_ue'),
-    url(r'taches/', 'services.views.liste_taches'),
+    url(r'^enseignants/', 'services.views.liste_enseignants'),
+    url(r'^ue/', 'services.views.liste_ue'),
+    url(r'^taches/', 'services.views.liste_taches'),
+    url(r'^nouvelens/', 'services.views.nouvelens'),
+    url(r'^nouvelleue/', 'services.views.nouvelleue'),
 ]
