@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils import timezone
 
 # Create your views here.
 
@@ -6,5 +7,9 @@ from django.shortcuts import render
 def home(request):
 	return render(request,'services/home.html')
 
-def enseignants(request):
-	return render(request, 'services/enseignants.html')
+
+from .models import Enseignant
+def liste_enseignants(request):
+
+	liste = Enseignant.objects.all()
+	return render(request, 'services/enseignants.html',{'date': timezone.now(), 'Enseignants' : liste})
