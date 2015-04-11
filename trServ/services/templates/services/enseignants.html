@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+	<title>liste enseignants</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'services/trstyle.css' %}"/>
+</head>
+<body>
+
+<h1>Liste des enseignants</h1>
+
+coucou
+<table>
+{% for enseignant in enseignants %}
+<tr>
+	<td>
+		{{enseignant.nom}}
+	</td>
+	<td>
+		{{enseignant.prenom }}
+	</td>
+</tr>
+{% endfor %}	
+
+</table>
+</body>
+</html>
