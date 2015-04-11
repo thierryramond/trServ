@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>Liste des taches</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'services/trstyle.css' %}"/>
+</head>
+<body>
+<h1>Liste des tâches</h1>
+
+
+La date actuelle est : {{date}}
+<br/><br/>
+
+<table>
+<tr>
+	<th> UE</th>
+	<th> Type</th>
+</tr>
+{% for tache in Taches %}
+<tr>
+	<td>
+		{{tache.ue}}
+	</td>
+	<td>
+		{{tache.type}}
+	</td>
+</tr>
+{% endfor %}	
+
+</table>
+
+</body>
+</html>
