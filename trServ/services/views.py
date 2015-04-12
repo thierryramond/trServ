@@ -10,7 +10,6 @@ def home(request):
 
 from .models import Enseignant
 def liste_enseignants(request):
-
 	liste = Enseignant.objects.all()
 	return render(request, 'services/enseignants.html',{'date': timezone.now(), 'Enseignants' : liste})
 

@@ -1,4 +1,8 @@
+@import url(http://fonts.googleapis.com/css?family=Oxygen:400,300,700);
+
+
 body{
+	font: 14px/1.6 'Oxygen',sans-serif;
 	background-color: #fff;
 	color: #333;
 }
@@ -24,4 +28,18 @@ th{
 	width: 120px;
 	text-decoration: bold;
 	color:#333;
+}
+
+.menu ul {
+	list-style-type: none;
+	display: inline;
+}
+
+.menu li{
+	display: inline;
+	margin: 20px;
+}
+
+.menu a{
+	text-decoration: none;
 }

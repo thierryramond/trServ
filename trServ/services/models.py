@@ -25,6 +25,18 @@ class Ue(models.Model):
 	description = models.TextField
 	responsable = models.ForeignKey(Enseignant)
 	specialité = models.CharField(max_length = 20)
+	horaire_total = models.IntegerField()
+	horaire_cours = models.IntegerField()
+	horaire_td = models.IntegerField()
+	horaire_tp = models.IntegerField()
+	horaire_intégré = models.IntegerField()
+	horaire_soutien = models.IntegerField()
+	horaire_coordination = models.IntegerField()
+	nombre_td = models.IntegerField()
+	nombre_tp = models.IntegerField()
+	nombre_cours = models.IntegerField()
+	nombre_intégré = models.IntegerField()
+	nombre_soutien = models.IntegerField()
 
 	def __str__(self):
 		return ('{0}, {1}'.format(self.code, self.titre))

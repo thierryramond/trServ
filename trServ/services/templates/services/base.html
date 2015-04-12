@@ -7,6 +7,16 @@
 </head>
 <body>
 
+<div class="menu">
+<ul >
+<li> <a href="{% url 'services.views.liste_enseignants' %}">Enseignants</a></li>
+<li> <a href="{% url 'services.views.liste_ue' %}">UE</a></li>
+<li> <a href="{% url 'services.views.liste_taches' %}">Taches</a></li>
+</ul>
+</div>
+<hr/>
+
+
 {% block content %}{% endblock %}
 
 </body>
