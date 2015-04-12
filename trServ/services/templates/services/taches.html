@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html>
-<head>
-	<title>Liste des taches</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'services/trstyle.css' %}"/>
-</head>
-<body>
+{% extends "services/base.html" %}
+{% block title %}Liste des taches{% endblock %}
+
+
+{% block content %}
 <h1>Liste des tâches</h1>
 
 
@@ -30,5 +27,4 @@ La date actuelle est : {{date}}
 
 </table>
 
-</body>
-</html>
+{% endblock %}

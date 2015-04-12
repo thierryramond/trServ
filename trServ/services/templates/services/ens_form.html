@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html>
-<head>
-	<title>Nouvel Enseignant</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'services/trstyle.css' %}"/>
-</head>
-<body>
+{% extends "services/base.html" %}
+{% block title %}Liste des Enseignants{% endblock %}
+
+
+{% block content %}
+
 <h1>Nouvel Enseignant</h1>
 <form action="{% url "services.views.nouvelens" %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="enregistrer" />
 </form>
-</body>
-</html>
+
+{% endblock %}

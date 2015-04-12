@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
 {% load staticfiles %}
 <html>
 <head>
-	<title>Gestion des Services</title>
+	<title>{%block title %}Gestion des Services{% endblock %}</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'services/trstyle.css' %}"/>
 </head>
 <body>
-<h1>
-Bienvenue!
-</h1>
+
+{% block content %}{% endblock %}
+
 </body>
 </html>

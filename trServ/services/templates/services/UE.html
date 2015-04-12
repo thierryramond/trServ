@@ -1,12 +1,8 @@
-<!DOCTYPE html>
+{% extends "services/base.html" %}
+{% block title %}Liste des UE{% endblock %}
 
-{% load staticfiles %}
-<html>
-<head>
-	<title>Liste des UE</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'services/trstyle.css' %}"/>
-</head>
-<body>
+
+{% block content %}
 
 <h1>Liste des UE</h1>
 <table>
@@ -29,5 +25,4 @@
 {% endfor %}	
 
 </table>
-</body>
-</html>
+{% endblock %}

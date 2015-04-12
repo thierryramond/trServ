@@ -1,13 +1,8 @@
-<!DOCTYPE html>
+{% extends "services/base.html" %}
+{% block title %}Liste des Enseignants{% endblock %}
 
-{% load staticfiles %}
 
-<html>
-<head>
-	<title>liste enseignants</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'services/trstyle.css' %}"/>
-</head>
-<body>
+{% block content %}
 
 <h1>Liste des enseignants</h1>
 
@@ -48,5 +43,5 @@ La date actuelle est : {{date}}
 {% endfor %}	
 
 </table>
-</body>
-</html>
+
+{% endblock %}
