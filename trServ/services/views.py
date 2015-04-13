@@ -51,3 +51,8 @@ def nouvelleue(request):
 
     return render(request, "services/ue_form.html", locals())
 
+
+def une_ue(request,code):
+    return render(request, "services/une_ue.html", {'code': code})
+
+

@@ -13,6 +13,8 @@ La date actuelle est : {{date}}
 <tr>
 	<th> UE</th>
 	<th> Type</th>
+	<th> Attribuée à</th>
+	<th> Horaire eq. TD</th>
 </tr>
 {% for tache in Taches %}
 <tr>
@@ -21,6 +23,12 @@ La date actuelle est : {{date}}
 	</td>
 	<td>
 		{{tache.type}}
+	</td>
+	<td>
+		{{tache.attribué_à}}
+	</td>
+	<td>
+		{{tache.horaire_eqtd}}
 	</td>
 </tr>
 {% endfor %}	

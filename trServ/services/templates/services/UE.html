@@ -4,21 +4,34 @@
 
 {% block content %}
 
-<h1>Liste des UE</h1>
+<h1>Listes des UE</h1>
 <table>
 <tr>
-	
+	<th>Id</th>
 	<th>Code</th>
 	<th>Titre</th>
+	<th>Responsable</th>
+	<th>Année</th>
+	<th>Semestre</th>
 	
 </tr>
 {% for ue in Ue %}
 <tr>
+	<td>{{ue.id}}</td>
 	<td>
-		{{ue.code}}
+		<a href="{{ue.code}}">{{ue.code}}</a>
 	</td>
 	<td>
 		{{ue.titre}}
+	</td>
+	<td>
+		{{ue.responsable}}
+	</td>
+	<td>
+		{{ue.année}}
+	</td>
+	<td>
+		{{ue.semestre}}
 	</td>
 	
 </tr>

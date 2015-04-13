@@ -14,7 +14,7 @@ class Enseignant(models.Model):
 	attribué = models.IntegerField (default = 0)
 
 	def __str__(self):
-		return ('{0}, {1}'.format(self.nom, self.prenom))
+		return ('{1} {0}'.format(self.nom, self.prenom))
 
 
 class Ue(models.Model):
@@ -39,16 +39,16 @@ class Ue(models.Model):
 	nombre_soutien = models.IntegerField()
 
 	def __str__(self):
-		return ('{0}, {1}'.format(self.code, self.titre))
+		return ('{0} - {1}'.format(self.code, self.titre))
 
 
 class Tache(models.Model):
 	ue = models.ForeignKey(Ue)
-	enseignant = models.ForeignKey(Enseignant)
+	attribué_à = models.ForeignKey(Enseignant)
 	nature = models.CharField(max_length = 20)
-	horaire_reel = models.IntegerField 
-	horaire_eqtd = models.IntegerField
+	horaire_reel = models.IntegerField()
+	horaire_eqtd = models.IntegerField()
 	modifié_le = models. DateTimeField(auto_now = True)
 	
 	def __str__(self):
-		return ('{0}, {1}'.format(self.ue, self.nature))
+		return ('{0} - {1}'.format(self.ue,  self.nature))
