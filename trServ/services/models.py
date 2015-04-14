@@ -17,6 +17,17 @@ class Enseignant(models.Model):
 	def __str__(self):
 		return ('{1} {0}'.format(self.nom, self.prenom))
 
+	def calcul_bilan(self):
+		return ('{0}'.format(self.service_du-self.decharge-self.attribué))
+
+
+	def total_attribué(self):
+		total = 0
+		for tache in Tache.objects.all() :
+			if tache.attribué_à == self :
+				total = total + tache.horaire_eqtd 
+		self.attribué = total
+		return ('{0}'.format(total))
 
 class Ue(models.Model):
 	titre = models.CharField(max_length = 100)

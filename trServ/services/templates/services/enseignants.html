@@ -10,25 +10,17 @@
 
 <table>
 <tr>
-	<th> </th>
-	<th> Nom</th>
-	<th> Prénom</th>
+	<th> Nom </th>
 	<th> Grade</th>
 	<th> Service théorique</th>
 	<th> Décharge </th>
-	<th> Service actuel </th>
+	<th> Attribué</th>
 	<th> Bilan</th>
 </tr>
 {% for enseignant in Enseignants%}
 <tr>
 	<td>
-		{{enseignant.id}}
-	</td>
-	<td>
-		{{enseignant.nom}}
-	</td>
-	<td>
-		{{enseignant.prenom }}
+		<a href="{{enseignant.id}}">{{enseignant.prenom }} {{enseignant.nom}}</a>
 	</td>
 	<td>
 		{{enseignant.grade}}
@@ -40,10 +32,10 @@
 		{{enseignant.decharge}}
 	</td>
 	<td>
-		{{enseignant.attribué}}
+		{{enseignant.total_attribué}}
 	</td>
 	<td>
-		{{enseignant.bilan}}
+		{{enseignant.calcul_bilan}}
 	</td>
 </tr>
 {% endfor %}	

@@ -4,6 +4,18 @@ from django.utils import timezone
 
 # Create your views here.
 
+from django.views.generic.list import ListView
+from .models import Enseignant
+
+class EnseignantListView(ListView):
+
+    model = Enseignant
+
+    def get_context_data(self, **kwargs):
+        context = super(EnseignantListView, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
 
 def home(request):
 	return render(request,'services/home.html',{'datetime': timezone.now()})
@@ -54,6 +66,11 @@ def nouvelleue(request):
 
 
 def une_ue(request,code):
-	return render(request, "services/une_ue.html", {'code': code},{'datetime': timezone.now()})
+	return render(request, "services/une_ue.html", {'code': code,'datetime': timezone.now()})
 
+def un_enseignant(request,pk):
+	return render(request, "services/un_ens.html", {'ens': Enseignant.objects.get(id=pk) , 'datetime': timezone.now()})
+
+def ens_form(request,pk):
+	return render(request, "services/ens_form.html", {'ens': Enseignant.objects.get(id=pk) , 'datetime': timezone.now()})
 

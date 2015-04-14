@@ -4,11 +4,9 @@
 
 {% block content %}
 
-<h1>Nouvel Enseignant</h1>
-<form action="{% url "services.views.nouvelens" %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="enregistrer" />
+<h1>Enseignant</h1>
+<form >
+    {{ form.as_table }}
 </form>
 
 {% endblock %}
