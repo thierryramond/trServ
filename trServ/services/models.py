@@ -12,6 +12,7 @@ class Enseignant(models.Model):
 	arrivé_en = models.DateField()
 	photo = models.ImageField(blank=True)
 	attribué = models.IntegerField (default = 0)
+	bilan = models.IntegerField ()
 
 	def __str__(self):
 		return ('{1} {0}'.format(self.nom, self.prenom))

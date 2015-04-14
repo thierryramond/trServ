@@ -6,21 +6,25 @@
 
 <h1>Liste des enseignants</h1>
 
-
-La date actuelle est : {{date}}
+Bonjour! Nous sommes le {{datetime|date}} et il est {{datetime|time}}
 <br/><br/>
 
 <table>
 <tr>
+	<th> </th>
 	<th> Nom</th>
 	<th> Prénom</th>
 	<th> Grade</th>
 	<th> Service théorique</th>
 	<th> Décharge </th>
 	<th> Service actuel </th>
+	<th> Bilan</th>
 </tr>
-{% for enseignant in Enseignants %}
+{% for enseignant in Enseignants%}
 <tr>
+	<td>
+		{{enseignant.id}}
+	</td>
 	<td>
 		{{enseignant.nom}}
 	</td>
@@ -38,6 +42,9 @@ La date actuelle est : {{date}}
 	</td>
 	<td>
 		{{enseignant.attribué}}
+	</td>
+	<td>
+		{{enseignant.bilan}}
 	</td>
 </tr>
 {% endfor %}	
