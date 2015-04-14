@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 def home(request):
-	return render(request,'services/home.html')
+	return render(request,'services/home.html',{'datetime': timezone.now()})
 
 
 from .models import Enseignant
@@ -18,13 +18,13 @@ def liste_enseignants(request):
 from .models import Ue
 def liste_ue(request):
 	liste_ue = Ue.objects.order_by('année','semestre')
-	return render(request, 'services/ue.html',{'date': timezone.now(), 'Ue' : liste_ue})
+	return render(request, 'services/ue.html',{'datetime': timezone.now(), 'Ue' : liste_ue})
 
 
 from .models import Tache
 def liste_taches(request):
 	liste = Tache.objects.all()
-	return render(request, 'services/taches.html',{'date': timezone.now(), 'Taches' : liste})
+	return render(request, 'services/taches.html',{'datetime': timezone.now(), 'Taches' : liste})
 
 from .forms import EnseignantForm
 def nouvelens(request):
@@ -37,7 +37,7 @@ def nouvelens(request):
 	else: # Si ce n'est pas du POST, c'est probablement une requête GET
 		form = EnseignantForm()  # Nous créons un formulaire vide
 
-	return render(request, "services/ens_form.html", locals())
+	return render(request, "services/ens_form.html", locals(),{'datetime': timezone.now()})
 
 from .forms import UeForm
 def nouvelleue(request):
@@ -50,10 +50,10 @@ def nouvelleue(request):
 	else: # Si ce n'est pas du POST, c'est probablement une requête GET
 		form = UeForm()  # Nous créons un formulaire vide
 
-	return render(request, "services/ue_form.html", locals())
+	return render(request, "services/ue_form.html", locals(), {'datetime': timezone.now()})
 
 
 def une_ue(request,code):
-	return render(request, "services/une_ue.html", {'code': code})
+	return render(request, "services/une_ue.html", {'code': code},{'datetime': timezone.now()})
 
 

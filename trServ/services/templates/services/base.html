@@ -13,11 +13,19 @@
 <li> <a href="{% url 'services.views.liste_ue' %}">UE</a></li>
 <li> <a href="{% url 'services.views.liste_taches' %}">Taches</a></li>
 </ul>
+
 </div>
 <hr/>
 
 
-{% block content %}{% endblock %}
+{% block content %}
 
+{% endblock %}
+
+
+<br>
+<br>
+<hr>
+Le {{datetime|date:"DATE_FORMAT"}} à {{datetime|time:"TIME_FORMAT"}}.
 </body>
 </html>
