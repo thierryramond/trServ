@@ -45,7 +45,7 @@ class Ue(models.Model):
 	code = models.CharField(max_length = 20)
 	année = models.CharField(max_length = 20)
 	semestre = models.CharField(max_length = 20)
-	description = models.TextField
+	description = models.TextField()
 	responsable = models.ForeignKey(Enseignant)
 	specialité = models.CharField(max_length = 20)
 	horaire_total = models.IntegerField()

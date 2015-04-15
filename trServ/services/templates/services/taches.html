@@ -10,6 +10,8 @@
 
 <table>
 <tr>
+	<th>Année</th>
+	<th>Semestre</th>
 	<th> UE</th>
 	<th> Type</th>
 	<th> Attribuée à</th>
@@ -17,14 +19,16 @@
 </tr>
 {% for tache in Taches %}
 <tr>
+	<td>{{tache.ue.année}}</td>
+	<td>{{tache.ue.semestre}}</td>
 	<td>
-		{{tache.ue}}
+		<a href="/ue/{{tache.ue.id}}">{{tache.ue}}</a>
 	</td>
 	<td>
-		{{tache.type}}
+		{{tache.nature}}
 	</td>
 	<td>
-		{{tache.attribué_à}}
+		<a href="/enseignants/{{tache.attribué_à.id}}">{{tache.attribué_à}}</a>
 	</td>
 	<td>
 		{{tache.horaire_eqtd}}
