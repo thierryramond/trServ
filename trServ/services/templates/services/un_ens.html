@@ -2,6 +2,37 @@
 
 
 
-{%block content %}
-{{ens.get_fields()}
-{%endblock content %}
+{% block content %}
+
+
+<h1>{{ens}}</h1>
+<br><br>
+
+
+
+<table>
+<tr>
+	<tr>
+	<th>Prénom</th>
+	<th> Nom </th>
+	<th> Grade</th>
+	<th> Arrivé(e) le</th>
+	<th> Service théorique</th>
+	<th> Décharge </th>
+	<th> Attribué</th>
+	<th> Bilan</th>
+</tr>
+</tr>
+<tr>
+{% for champ in ens.as_list%}
+<td>  {{ champ }} </td>
+{% endfor %}
+</tr>
+</table>
+
+
+
+{{Tache.objects.all}}
+
+
+{% endblock content %}

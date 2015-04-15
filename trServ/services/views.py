@@ -69,7 +69,8 @@ def une_ue(request,code):
 	return render(request, "services/une_ue.html", {'code': code,'datetime': timezone.now()})
 
 def un_enseignant(request,pk):
-	return render(request, "services/un_ens.html", {'ens': Enseignant.objects.get(id=pk) , 'datetime': timezone.now()})
+	return render(request, "services/un_ens.html", {'ens': Enseignant.objects.filter(id=pk)[0], 'datetime': timezone.now()})
+
 
 def ens_form(request,pk):
 	return render(request, "services/ens_form.html", {'ens': Enseignant.objects.get(id=pk) , 'datetime': timezone.now()})
