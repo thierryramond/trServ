@@ -21,7 +21,8 @@ table {
 td{
 	border: 1px solid #666;
 	width: 140px;
-	text-align: center;
+	text-align: left;
+	padding-left:10px;
 }
 
 
@@ -30,6 +31,7 @@ th{
 	width: 120px;
 	text-decoration: bold;
 	color:#333;
+	background-color: #0CA;
 }
 
 .menu ul {

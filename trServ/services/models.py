@@ -15,19 +15,14 @@ class Enseignant(models.Model):
 	attribué = models.IntegerField (default = 0)
 	bilan = models.IntegerField ()
 
-	
-	
-
 	def __str__(self):
 		return ('{1} {0}'.format(self.nom, self.prenom))
 
 	def as_list(self):
 		return (self.prenom, self.nom, self.grade,self.arrivé_en,self.service_du,self.decharge,self.attribué,self.bilan)
 
-
 	def calcul_bilan(self):
 		return ('{0}'.format(self.service_du-self.decharge-self.attribué))
-
 
 	def total_attribue(self):
 		total = 0

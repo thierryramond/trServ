@@ -40,7 +40,8 @@ def liste_ue(request):
 
 from .models import Tache
 def liste_taches(request):
-	liste = Tache.objects.all()
+	order_by = request.GET.get('order_by', 'ue')
+	liste = Tache.objects.all().order_by(order_by)
 	return render(request, 'services/taches.html',{'datetime': timezone.now(), 'Taches' : liste})
 
 from .forms import EnseignantForm
