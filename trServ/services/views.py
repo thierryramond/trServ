@@ -1,13 +1,18 @@
 from django.shortcuts import render
 from django.utils import timezone
 
-
 # Create your views here.
+from django.views import generic
+from .models import Enseignant, Tache
 
-from django.views.generic.list import ListView
-from .models import Enseignant
 
-class EnseignantListView(ListView):
+class tache_detail(generic.DetailView):
+    model = Tache
+    template_name = 'services/tache_detail.html'
+
+    
+
+class EnseignantListView(generic.ListView):
 
     model = Enseignant
 
@@ -49,7 +54,7 @@ def nouvelens(request):
 	else: # Si ce n'est pas du POST, c'est probablement une requête GET
 		form = EnseignantForm()  # Nous créons un formulaire vide
 
-	return render(request, "services/ens_form.html", locals(),{'datetime': timezone.now()})
+	return render(request, "services/ens_form.html",{'datetime': timezone.now()})
 
 from .forms import UeForm
 def nouvelleue(request):
@@ -75,3 +80,6 @@ def un_enseignant(request,pk):
 def ens_form(request,pk):
 	return render(request, "services/ens_form.html", {'ens': Enseignant.objects.get(id=pk) , 'datetime': timezone.now()})
 
+
+def ue_form(request,pk):
+	return render(request, "services/ue_form.html", {'ue': Ue.objects.get(id=pk) , 'datetime': timezone.now()})

@@ -1,0 +1,33 @@
+{% extends "services/base.html" %}
+{% block title %} Détail d'une Tache {% endblock %}
+
+
+{% block content %}
+<h1>Détail d'une tache</h1>
+
+<br/><br/>
+
+<table>
+<tr>
+	<th style="width: 10%;">Année</th>
+	<th style="width: 10%;">Semestre</th>
+	<th style="width: 30%;"> UE</th>
+	<th style="width: 10%;"> Tache</th>
+	<th style="width: 20%;"> Attribuée à</th>
+	<th style="width: 10%;"> Horaire réel</th>
+	<th style="width: 10%;"> Horaire eq. TD</th>
+	<th style="width: 20%;"> Modifiée le</th>
+</tr>
+<tr>
+<td>{{tache.ue.année}}</td>
+<td>{{tache.ue.semestre}}</td>
+<td>{{tache.ue}}</td>
+<td>{{tache.nature}}</td>
+<td>{{tache.attribué_à}}</td>
+<td>{{tache.horaire_reel}}</td>
+<td>{{tache.horaire_eqtd}}</td>
+<td>{{tache.modifié_le}}</td>
+</tr>
+</table>
+
+{% endblock %}

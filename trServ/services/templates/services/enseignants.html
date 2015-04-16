@@ -20,7 +20,7 @@
 {% for enseignant in Enseignants%}
 <tr>
 	<td>
-		<a href="{{enseignant.id}}">{{enseignant.prenom }} {{enseignant.nom}}</a>
+		<a href="{% url 'enseignant' enseignant.id%}">{{enseignant.prenom }} {{enseignant.nom}}</a>
 	</td>
 	<td>
 		{{enseignant.grade}}

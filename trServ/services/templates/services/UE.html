@@ -7,33 +7,20 @@
 <h1>Listes des UE</h1>
 <table>
 <tr>
-	<th>Id</th>
-	<th>Code</th>
-	<th>Titre</th>
-	<th>Responsable</th>
-	<th>Année</th>
-	<th>Semestre</th>
+	<th style="width: 10%;">Code</th>
+	<th style="width: 10%;">Titre</th>
+	<th style="width: 10%;">Responsable</th>
+	<th style="width: 10%;">Année</th>
+	<th style="width: 10%;">Semestre</th>
 	
 </tr>
 {% for ue in Ue %}
 <tr>
-	<td>{{ue.id}}</td>
-	<td>
-		<a href="{{ue.id}}">{{ue.code}}</a>
-	</td>
-	<td>
-		{{ue.titre}}
-	</td>
-	<td>
-		{{ue.responsable}}
-	</td>
-	<td>
-		{{ue.année}}
-	</td>
-	<td>
-		{{ue.semestre}}
-	</td>
-	
+	<td style="width: 20%;"><a href="{{ue.id}}">{{ue.code}}</a></td>
+	<td style="width: 30%;">{{ue.titre}}</td>
+	<td style="width: 30%;">{{ue.responsable}}</td>
+	<td style="width: 10%;">{{ue.année}}</td>
+	<td style="width: 10%;">{{ue.semestre}}</td>
 </tr>
 {% endfor %}	
 
