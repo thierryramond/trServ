@@ -32,7 +32,7 @@ class Enseignant(models.Model):
 		self.attribué = total
 		return ('{0}'.format(total))
 
-	bilan = property(calcul_bilan)	
+	
 	
 
 class Ue(models.Model):

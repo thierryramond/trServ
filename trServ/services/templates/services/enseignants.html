@@ -10,12 +10,12 @@
 
 <table>
 <tr>
-	<th> Nom </th>
-	<th> Grade</th>
+	<th> <a href="?order_by=nom">Nom</a> </th>
+	<th> <a href="?order_by=grade">Grade</a></th>
 	<th> Service théorique</th>
 	<th> Décharge </th>
-	<th> Attribué</th>
-	<th> Bilan</th>
+	<th> <a href="?order_by=-attribué">Attribué</a></th>
+	<th> <a href="?order_by=-bilan">Bilan</a></th>
 </tr>
 {% for enseignant in Enseignants%}
 <tr>
@@ -35,7 +35,7 @@
 		{{enseignant.total_attribue}}
 	</td>
 	<td>
-		{{enseignant.bilan}}
+		{{enseignant.calcul_bilan}}
 	</td>
 </tr>
 {% endfor %}	

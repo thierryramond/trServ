@@ -2,7 +2,7 @@
 
 
 body{
-	font: 14px/1.6 Arial,'Oxygen',sans-serif;
+	font: 14px/1.6 'Oxygen',sans-serif;
 	background-color: #fff;
 	color: #333;
 }
@@ -33,6 +33,11 @@ th{
 	color:#333;
 	background-color: #0CA;
 }
+
+th a{
+	text-decoration: none;
+}
+
 
 .menu ul {
 	list-style-type: none;

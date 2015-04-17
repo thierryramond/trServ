@@ -24,9 +24,30 @@
 </tr>
 </tr>
 <tr>
-{% for champ in ens.as_list%}
-<td>  {{ champ }} </td>
-{% endfor %}
+	<td>
+		<a>{{ens.prenom }}</a>
+	</td>
+	<td>
+	 {{ens.nom}}
+	</td>	
+	<td>
+		{{ens.grade}}
+	</td>
+	<td>
+		{{ens.arrivé_en}}
+	</td>
+	<td>
+		{{ens.service_du}}
+	</td>
+	<td>
+		{{ens.decharge}}
+	</td>
+	<td>
+		{{ens.total_attribue}}
+	</td>
+	<td>
+		{{ens.calcul_bilan}}
+	</td>
 </tr>
 </table>
 
