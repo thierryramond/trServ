@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Sum
 from django.core.urlresolvers import reverse
-
+from django.utils import timezone
 
 
 # Create your models here.
@@ -92,7 +92,7 @@ class Tache(models.Model):
     horaire_eqtd = models.IntegerField()
     modifié_le = models. DateTimeField(auto_now = True)
     depuis = models.IntegerField(default=0)
-    millesime = models.IntegerField()
+    millesime = models.IntegerField(default=timezone.now().year)
 
     def calcul_eqtd(self):
         if self.nature == 'intégré': self.horaire_eqtd = self.horaire_reel*1.25

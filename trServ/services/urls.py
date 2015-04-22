@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^tache/(?P<pk>\d+$)$', views.tache_detail.as_view(),name='tache-view'),
     url(r'^tache_form/$', views.nouvelletache,  name= 'tache_form'),
     url(r'ue/(?P<pk>.+$)', views.une_ue, name ='une_ue'),
+    url(r'^filter$', views.CreateTacheView.as_view(), name='tache-filter'),
     url(r'^new$', views.CreateTacheView.as_view(), name='tache-new'),
     url(r'^edit/(?P<pk>\d+)/$', views.UpdateTacheView.as_view(), name='tache-edit',),
     url(r'^delete/(?P<pk>\d+)/$', views.DeleteTacheView.as_view(), name='tache-delete',),

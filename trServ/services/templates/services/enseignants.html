@@ -16,6 +16,7 @@
 	<th> <a href="?order_by=-decharge">Décharge</a> </th>
 	<th> <a href="?order_by=-attribué">Attribué</a></th>
 	<th> <a href="?order_by=bilan">Bilan</a></th>
+	<th> <a href="?order_by=millesime">Millesime</a></th>
 </tr>
 {% for enseignant in Enseignants%}
 <tr>
@@ -37,6 +38,10 @@
 	<td>
 		{{enseignant.calcul_bilan}}
 	</td>
+	<td>
+		{{enseignant.millesime}}
+	</td>
+
 </tr>
 {% endfor %}	
 

@@ -12,6 +12,7 @@
 	<th style="width: 10%;"><a href="?order_by=responsable">Responsable</a></th>
 	<th style="width: 10%;"><a href="?order_by=année">Année</a></th>
 	<th style="width: 10%;"><a href="?order_by=semestre">Semestre</a></th>
+	<th style="width: 10%;"><a href="?order_by=millesime">Millesime</a></th>
 	
 </tr>
 {% for ue in Ue %}
@@ -21,6 +22,7 @@
 	<td style="width: 30%;">{{ue.responsable}}</td>
 	<td style="width: 10%;">{{ue.année}}</td>
 	<td style="width: 10%;">{{ue.semestre}}</td>
+	<td style="width: 10%;">{{ue.millesime}}</td>
 </tr>
 {% endfor %}	
 

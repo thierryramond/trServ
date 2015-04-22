@@ -3,12 +3,15 @@
 
 
 {% block content %}
-
+<div class="menu">
+<ul >
+<li><a href="{% url "tache-new" %}">nouvelle tache</a></li>
+<li><a href="{% url "tache-filter" %}">Filtrer</a></li>
+</ul>
+<br><br>
 
 <h1>Liste des tâches</h1>
 
-<br/><br/>
-<a href="{% url "tache-new" %}">nouvelle tache</a>
 
 <br/><br/>
 <table>
@@ -19,6 +22,7 @@
 	<th style="width: 10%;"> <a href="?order_by=nature">Tache</a></th>
 	<th style="width: 20%;"> <a href="?order_by=-attribué_à">Attribuée à</a></th></th>
 	<th style="width: 10%;"> <a href="?order_by=horaire_eqtd">Horaire eq. TD</th>
+	<th style="width: 5%;"> <a href="?order_by=millesime">Millesime</th>
 </tr>
 {% for tache in Taches %}
 <tr>
@@ -28,6 +32,7 @@
 	<td style="width: 10%;"><a href="/tache/{{tache.id}}">{{tache.nature}}</a></td>
 	<td style="width: 20%;"><a href="/enseignant/{{tache.attribué_à.id}}">{{tache.attribué_à}}</a></td>
 	<td style="width: 10%;">{{tache.calcul_eqtd}}</td>
+	<td style="width: 5%;">{{tache.millesime}}</td>
 </tr>
 {% endfor %}	
 
