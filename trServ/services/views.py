@@ -33,7 +33,7 @@ def liste_enseignants(request):
 def liste_ue(request):
 	order_by = request.GET.get('order_by', 'année')
 	liste_ue = Ue.objects.order_by(order_by)
-	return render(request, 'services/ue_list.html',{'datetime': timezone.now(), 'Ue' : liste_ue})
+	return render(request, 'services/ues.html',{'datetime': timezone.now(), 'Ue' : liste_ue})
 
 
 def liste_taches(request):
@@ -51,6 +51,11 @@ class tache_detail(generic.DetailView):
     model = Tache
     template_name = 'services/tache_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(tache_detail, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
 
 def une_ue(request,pk):
 	return render(request, "services/une_ue.html", {'ue': Ue.objects.get(id=pk),'datetime': timezone.now()})
@@ -58,6 +63,17 @@ def une_ue(request,pk):
 def un_enseignant(request,pk):
 	return render(request, "services/un_ens.html", {'ens': Enseignant.objects.filter(id=pk)[0], 'datetime': timezone.now()})
 
+
+class ue_detail(generic.DetailView):
+    model = Ue
+    template_name = 'services/ue_detail.html'
+
+
+def une_ue(request,pk):
+	return render(request, "services/une_ue.html", {'ue': Ue.objects.get(id=pk),'datetime': timezone.now()})
+
+def un_enseignant(request,pk):
+	return render(request, "services/un_ens.html", {'ens': Enseignant.objects.filter(id=pk)[0], 'datetime': timezone.now()})
 
 
 #-----------------------------------------------
@@ -130,10 +146,8 @@ from django.core.urlresolvers import reverse
 from django.views.generic import CreateView
 
 class CreateTacheView(CreateView):
-
     model = Tache
     template_name = 'services/edit_tache.html'
-    #fields = ('first_name','last_name')
     form_class = TacheForm
 
     def get_success_url(self):
@@ -142,6 +156,20 @@ class CreateTacheView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(CreateTacheView, self).get_context_data(**kwargs)
         context['action'] = reverse('tache-new')
+        context['datetime'] = timezone.now()
+        return context
+
+class CreateUeView(CreateView):
+    model = Ue
+    template_name = 'services/edit_ue.html'
+    form_class = UeForm
+
+    def get_success_url(self):
+        return reverse('ue_list')
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateUeView, self).get_context_data(**kwargs)
+        context['action'] = reverse('ue-new')
         context['datetime'] = timezone.now()
         return context
 

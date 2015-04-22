@@ -7,15 +7,36 @@
 </head>
 <body>
 
-<div class="menu">
+<header>
+
+<logo>
+	<img src="{% static 'services/images/dmo.png' %}" alt="" height=80px />
+</logo>
+
+<chapeau>
+	
+    <h2><a href="http://www.math.u-psud.fr"> 
+    	Département de <br/> Mathématiques d'Orsay  </a> 
+        <br/> <a href="http://www.u-psud.fr">  Université Paris Sud</a>
+    </h2>
+</chapeau>
+    	
+<chapeau_droit>
+    <h2> Gestion des Services<h2/>
+</chapeau_droit>
+     	
+</header>
+
+<nav>
 <ul >
 <li> <a href="{% url 'enseignants' %}">Enseignants</a></li>
 <li> <a href="{% url 'ue' %}">UE</a></li>
 <li> <a href="{% url 'taches' %}">Taches</a></li>
 </ul>
 
-</div>
-<hr/>
+</nav>
+
+
 
 
 {% block content %}

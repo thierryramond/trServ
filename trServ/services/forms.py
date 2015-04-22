@@ -12,7 +12,6 @@ class UeForm(forms.ModelForm):
         exclude = ()
 
 class TacheForm(forms.ModelForm):
-
     class Meta:
         model = Tache
         exclude = ()

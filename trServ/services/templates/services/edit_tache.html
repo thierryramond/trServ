@@ -16,14 +16,14 @@
 <table>
 <tr>
 {% for field in form %}
-<th>
+<th style="width: 5%;">
  {{ field.label_tag }} 
 </th>
 {%endfor%}
 </tr>
 
  <tr> {% for field in form %}
-    <td>
+    <td style="width: 5%;">
      {{ field }}
     </td>
   {% endfor %}
@@ -32,13 +32,11 @@
 
 
  
- <input id="save_tache" type="submit" value="Enregistrer" />
+<input id="save_tache" type="submit" value="Enregistrer" />
 </form>
 
 {% if tache.id %}
-<a href="{% url "tache-edit" pk=tache.id %}">
-  Edit Addresses
-</a>
+<a href="{% url "tache-edit" pk=tache.id %}">Modifier</a>
 <a href="{% url "tache-delete" pk=contact.id %}">Effacer</a>
 {% endif %}
 
