@@ -1,0 +1,47 @@
+{% extends "services/base.html" %}
+
+{% block content %}
+
+
+
+{% if ue.id %}
+<h1>Modifier l'UE/h1>
+{% else %}
+<h1>Nouvelle UE</h1>
+{% endif %}
+
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+<table>
+<tr>
+{% for field in form %}
+<th>
+ {{ field.label_tag }} 
+</th>
+{%endfor%}
+</tr>
+
+ <tr> {% for field in form %}
+    <td>
+     {{ field }}
+    </td>
+  {% endfor %}
+</tr> 
+</table>
+
+
+ 
+ <input id="save_ue" type="submit" value="Enregistrer" />
+</form>
+
+{% if ue.id %}
+<a href="{% url "ue-edit" pk=ue.id %}">
+  Modifier
+</a>
+<a href="{% url "ue-delete" pk=ue.id %}">Effacer</a>
+{% endif %}
+
+<a href="{% url "taches" %}">retour à la liste</a>
+
+{% endblock %}

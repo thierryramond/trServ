@@ -4,14 +4,14 @@
 
 {% block content %}
 
-<h1>Listes des UE</h1>
+<h1>Liste des UE</h1>
 <table>
 <tr>
-	<th style="width: 10%;">Code</th>
-	<th style="width: 10%;">Titre</th>
-	<th style="width: 10%;">Responsable</th>
-	<th style="width: 10%;">Année</th>
-	<th style="width: 10%;">Semestre</th>
+	<th style="width: 10%;"><a href="?order_by=code">Code</a></th>
+	<th style="width: 10%;"><a href="?order_by=titre">Titre</a></th>
+	<th style="width: 10%;"><a href="?order_by=responsable">Responsable</a></th>
+	<th style="width: 10%;"><a href="?order_by=année">Année</a></th>
+	<th style="width: 10%;"><a href="?order_by=semestre">Semestre</a></th>
 	
 </tr>
 {% for ue in Ue %}

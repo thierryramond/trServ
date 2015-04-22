@@ -1,0 +1,14 @@
+{% extends 'services/base.html' %}
+
+{% block content %}
+
+<h1> Nouvelle Tache</h1>
+
+<form action="/tache_form/" method="post">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <br><br>
+    <input type="submit" value="enregistrer" />
+</form>
+
+{% endblock content %}

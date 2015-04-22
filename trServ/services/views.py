@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.utils import timezone
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 from django.views import generic
 from .models import Enseignant, Tache, Ue
-from .forms import EnseignantForm, UeForm
+from .forms import EnseignantForm, UeForm, TacheForm
 #-----------------------------------------------
 # acceuil
 
@@ -24,14 +25,15 @@ class EnseignantListView(generic.ListView):
 
 
 def liste_enseignants(request):
-	order_by = request.GET.get('order_by', 'grade')
+	order_by = request.GET.get('order_by', 'bilan')
 	liste_ens = Enseignant.objects.order_by(order_by)
 	return render(request, 'services/enseignants.html',{'datetime': timezone.now(), 'Enseignants' : liste_ens})
 
 
 def liste_ue(request):
-	liste_ue = Ue.objects.order_by('année','semestre')
-	return render(request, 'services/ue.html',{'datetime': timezone.now(), 'Ue' : liste_ue})
+	order_by = request.GET.get('order_by', 'année')
+	liste_ue = Ue.objects.order_by(order_by)
+	return render(request, 'services/ue_list.html',{'datetime': timezone.now(), 'Ue' : liste_ue})
 
 
 def liste_taches(request):
@@ -60,6 +62,26 @@ def un_enseignant(request,pk):
 
 #-----------------------------------------------
 # Formulaires
+
+
+def tache_form(request,pk):
+	return render(request, "services/tache_form.html", {'datetime': timezone.now()})
+
+
+def nouvelletache(request):
+	if request.method == 'POST':  # S'il s'agit d'une requête POST
+		form = TacheForm(request.POST)  # Nous reprenons les données
+
+		if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+			form.save()
+			return HttpResponseRedirect('enseignants')
+
+	else: # Si ce n'est pas du POST, c'est probablement une requête GET
+		form = TacheForm()  # Nous créons un formulaire vide
+
+	return render(request, "services/tache_form.html", {'form':form, 'datetime': timezone.now()})
+
+
 
 def ens_form(request,pk):
 	return render(request, "services/ens_form.html", {'ens': Enseignant.objects.get(id=pk) , 'datetime': timezone.now()})
@@ -94,8 +116,78 @@ def nouvelleue(request):
 	else: # Si ce n'est pas du POST, c'est probablement une requête GET
 		form = UeForm()  # Nous créons un formulaire vide
 
-	return render(request, "services/ue_form.html", locals(), {'datetime': timezone.now()})
+	return render(request, "services/ue_form.html", {'datetime': timezone.now()})
 
 
+
+
+
+
+
+#-----------------------------------------------
+# Create
+from django.core.urlresolvers import reverse
+from django.views.generic import CreateView
+
+class CreateTacheView(CreateView):
+
+    model = Tache
+    template_name = 'services/edit_tache.html'
+    #fields = ('first_name','last_name')
+    form_class = TacheForm
+
+    def get_success_url(self):
+        return reverse('taches')
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateTacheView, self).get_context_data(**kwargs)
+        context['action'] = reverse('tache-new')
+        context['datetime'] = timezone.now()
+        return context
+
+#---------------------
+# Edit
+
+from django.views.generic import UpdateView
+from services import forms
+class UpdateTacheView(UpdateView):
+
+    model = Tache
+    template_name = 'edit_tache.html'
+    #fields = ('first_name','last_name')
+    form_class = forms.TacheForm
+
+    def get_success_url(self):
+        return reverse('taches')
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateTacheView, self).get_context_data(**kwargs)
+        context['action'] = reverse('tache-edit', kwargs={'pk': self.get_object().id})
+        return context
+
+
+#-----------------------------------------------
+# Delete
+
+
+from django.views.generic import DeleteView
+class DeleteTacheView(DeleteView):
+
+    model = Tache
+    template_name = 'delete_tache.html'
+
+    def get_success_url(self):
+        return reverse('taches')
+
+#-----------------------------------------------
+# Detail
+       
+
+from django.views.generic import DetailView
+class TacheView(DetailView):
+
+    model = Tache
+    template_name = 'tache.html'
+    exclude = ()
 
 
