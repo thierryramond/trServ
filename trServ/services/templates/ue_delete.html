@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Effacer une UE</h1>
+
+<p>Voulez vous vraiment effacer cette UE {{ ue }}?</p>
+
+<form action="{% url "ue-delete" pk=ue.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Oui, effacer." />
+  <a href="{% url "ues" %}">Annuler.</a>
+</form>
+
+{% endblock %}

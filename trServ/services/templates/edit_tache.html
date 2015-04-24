@@ -1,7 +1,13 @@
-{% extends "services/base.html" %}
-
+{% extends "base.html" %}
 {% block content %}
 
+
+{% if tache.id %}
+<nav>
+<a href="{% url "tache-edit" pk=tache.id %}">Modifier</a>
+<a href="{% url "tache-delete" pk=tache.id %}">Effacer</a>
+</nav>
+{% endif %}
 
 
 {% if tache.id %}
@@ -22,24 +28,17 @@
 {%endfor%}
 </tr>
 
- <tr> {% for field in form %}
-    <td style="width: 5%;">
-     {{ field }}
-    </td>
+ <tr> 
+ {% for field in form %}
+
+    <td style="width: 5%;">{{ field }}</td>
+  
   {% endfor %}
 </tr> 
 </table>
 
-
- 
 <input id="save_tache" type="submit" value="Enregistrer" />
 </form>
 
-{% if tache.id %}
-<a href="{% url "tache-edit" pk=tache.id %}">Modifier</a>
-<a href="{% url "tache-delete" pk=contact.id %}">Effacer</a>
-{% endif %}
-
-<a href="{% url "taches" %}">retour à la liste</a>
 
 {% endblock %}

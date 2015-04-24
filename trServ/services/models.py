@@ -12,7 +12,7 @@ class Enseignant(models.Model):
     grade = models.CharField(max_length = 100)
     service_du = models.IntegerField (default = 192)
     decharge = models.IntegerField (default = 0)
-    commentaire = models.TextField(blank=True)
+    commentaire = models.CharField(max_length = 255, blank= True)
     arrivé_en = models.DateField(blank=True)
     photo = models.ImageField(blank=True)
     attribué = models.IntegerField (default = 0)
@@ -20,7 +20,7 @@ class Enseignant(models.Model):
     millesime = models.IntegerField (default = 0)
 
     class Meta():
-        unique_together = ("nom", "prenom")
+        unique_together = ("nom", "prenom","millesime")
 
     def __str__(self):
         return ('{1} {0}'.format(self.nom, self.prenom))
@@ -60,9 +60,9 @@ class Ue(models.Model):
     code = models.CharField(max_length = 20)
     année = models.CharField(max_length = 20)
     semestre = models.CharField(max_length = 20)
-    description = models.TextField()
+    description = models.CharField(max_length = 255)
     responsable = models.ForeignKey(Enseignant)
-    specialité = models.CharField(max_length = 20)
+    spécialité = models.CharField(max_length = 20)
     horaire_total = models.IntegerField()
     horaire_cours = models.IntegerField()
     horaire_td = models.IntegerField()
@@ -83,13 +83,19 @@ class Ue(models.Model):
     def get_absolute_url(self):
         return reverse('ue-view', kwargs={'pk': self.id})
 
+    class Meta():
+        unique_together = ( 'code','millesime')
+
+
+nature_tache = (('TD','TD'),('Cours','Cours'),('Intégré','Intégré'),('TP','TP'),)
+
 
 class Tache(models.Model):
     ue = models.ForeignKey(Ue)
     attribué_à = models.ForeignKey(Enseignant)
-    nature = models.CharField(max_length = 20)
+    nature = models.CharField(max_length = 20, choices = nature_tache)
     horaire_reel = models.IntegerField()
-    horaire_eqtd = models.IntegerField()
+    horaire_eqtd = models.IntegerField(blank = True, null = True)
     modifié_le = models. DateTimeField(auto_now = True)
     depuis = models.IntegerField(default=0)
     millesime = models.IntegerField(default=timezone.now().year)

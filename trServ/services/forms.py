@@ -14,7 +14,7 @@ class UeForm(forms.ModelForm):
 class TacheForm(forms.ModelForm):
     class Meta:
         model = Tache
-        exclude = ()
+        exclude = ('horaire_eqtd',)
 
 
 

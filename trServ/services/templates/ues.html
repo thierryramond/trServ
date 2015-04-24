@@ -1,4 +1,4 @@
-{% extends "services/base.html" %}
+{% extends "base.html" %}
 {% block title %}Liste des UE{% endblock %}
 
 
@@ -23,7 +23,7 @@
 </tr>
 {% for ue in Ue %}
 <tr>
-	<td style="width: 20%;"><a href="{{ue.id}}">{{ue.code}}</a></td>
+	<td style="width: 20%;"><a href="{% url "ue-edit" ue.id %}">{{ue.code}}</a></td>
 	<td style="width: 30%;">{{ue.titre}}</td>
 	<td style="width: 30%;">{{ue.responsable}}</td>
 	<td style="width: 10%;">{{ue.année}}</td>

@@ -1,13 +1,16 @@
-{% extends 'services/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+
 
 <h1> Nouvelle Tache</h1>
 
 <form action="/tache_form/" method="post">
     {% csrf_token %}
-    {{ form.as_ul }}
+    {{ form }}
+    {{ form.horaire_eqtd = Tache.calcul_eqtd }}
     <br><br>
+
     <input type="submit" value="enregistrer" />
 </form>
 

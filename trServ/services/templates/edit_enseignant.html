@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+{% if enseignant.id %}
+<h1>Modifier l'Enseignant</h1>
+{% else %}
+<h1>Nouvel Enseignant</h1>
+{% endif %}
+
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+<table>
+<tr>
+{% for field in form %}
+<th style="width:80px;">
+ {{ field.label_tag }} 
+</th>
+{%endfor%}
+</tr>
+
+ <tr> 
+ {% for field in form %}
+
+    <td style="width: 5%;">{{ field }}</td>
+  
+  {% endfor %}
+</tr> 
+</table>
+
+
+<input id="save_enseignant" type="submit" value="Enregistrer" />
+</form>
+
+{% if tache.id %}
+<a href="{% url "enseignant-edit" pk=tache.id %}">Modifier</a>
+<a href="{% url "enseignant-delete" pk=contact.id %}">Effacer</a>
+{% endif %}
+
+<a href="{% url "enseignants" %}">retour à la liste</a>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Effacer une tache</h1>
+
+<p>Voulez vous vraiment effacer cette tache: {{ tache }} attribuée à {{ tache__enseignant }}?</p>
+
+<form action="{% url "tache-delete" pk=tache.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Oui, effacer." />
+  <a href="{% url "taches" %}">Annuler.</a>
+</form>
+
+{% endblock %}
