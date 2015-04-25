@@ -2,17 +2,63 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 
-# Create your views here.
+
 from django.views import generic
 from .models import Enseignant, Tache, Ue
 from .forms import EnseignantForm, UeForm, TacheForm
-#-----------------------------------------------
+
+
+#-------------------------------------------------------------------------------------------
 # acceuil
+#-------------------------------------------------------------------------------------------
+
 
 def home(request):
 	return render(request,'home.html',{'datetime': timezone.now()})
 
+
+#-------------------------------------------------------------------------------------------
+# Taches
+#-------------------------------------------------------------------------------------------
+
+
+# Affichage par liste
+
+def liste_taches(request):
+    order_by = request.GET.get('order_by', 'ue')
+    liste = Tache.objects.all().order_by(order_by)
+    return render(request, 'taches.html',{'datetime': timezone.now(), 'Taches' : liste})
+
+# Affichage d'une tache 
+
+class tache_detail(generic.DetailView):
+    model = Tache
+    template_name = 'tache_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(tache_detail, self).get_context_data(**kwargs)
+        context['timezone'] = timezone.now()
+        return context
+
+
+#-------------------------------------------------------------------------------------------
+# UEs
+#-------------------------------------------------------------------------------------------
+
+# Affichage par liste
+
+def liste_ue(request):
+    order_by = request.GET.get('order_by', 'année')
+    liste_ue = Ue.objects.order_by(order_by)
+    return render(request, 'ues.html',{'datetime': timezone.now(), 'Ue' : liste_ue})
+
+
+
+
 #-----------------------------------------------
+# Enseignants
+#-----------------------------------------------
+
 # Affichage par liste
 
 class EnseignantListView(generic.ListView):
@@ -30,31 +76,9 @@ def liste_enseignants(request):
 	return render(request, 'enseignants.html',{'datetime': timezone.now(), 'Enseignants' : liste_ens})
 
 
-def liste_ue(request):
-	order_by = request.GET.get('order_by', 'année')
-	liste_ue = Ue.objects.order_by(order_by)
-	return render(request, 'ues.html',{'datetime': timezone.now(), 'Ue' : liste_ue})
-
-
-def liste_taches(request):
-	order_by = request.GET.get('order_by', 'ue')
-	liste = Tache.objects.all().order_by(order_by)
-	return render(request, 'taches.html',{'datetime': timezone.now(), 'Taches' : liste})
 
 
 
-#-----------------------------------------------
-# Affichage un(e) seul(e)
-
-
-class tache_detail(generic.DetailView):
-    model = Tache
-    template_name = 'tache_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(tache_detail, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
 
 
 def une_ue(request,pk):
