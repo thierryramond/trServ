@@ -35,6 +35,14 @@ def liste_taches(request):
 
 # Affichage d'une tache 
 
+class TacheView(DetailView):
+
+    model = Tache
+    template_name = 'tache.html'
+    exclude = ()
+
+
+
 class tache_detail(generic.DetailView):
     model = Tache
     template_name = 'tache_detail.html'
@@ -63,7 +71,49 @@ class CreateTacheView(CreateView):
 
 # Mise à jour d'une tache
 
+class UpdateTacheView(UpdateView):
+
+    model = Tache
+    template_name = 'edit_tache.html'
+    #fields = ('first_name','last_name')
+    form_class = forms.TacheForm
+
+    def get_success_url(self):
+        return reverse('taches')
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateTacheView, self).get_context_data(**kwargs)
+        context['action'] = reverse('tache-edit', kwargs={'pk': self.get_object().id})
+        return context
+
+
 # Effacer une tache
+
+from django.views.generic import DeleteView
+class DeleteTacheView(DeleteView):
+
+    model = Tache
+    template_name = 'tache_delete.html'
+
+    def get_success_url(self):
+        return reverse('taches')
+
+
+# Formulaire tache
+
+
+def tache_form(request,pk):
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = TacheForm(request.POST)  # Nous reprenons les données
+
+        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+            form.save()
+            return HttpResponseRedirect('taches',{'datetime': timezone.now()})
+
+    else: # Si ce n'est pas du POST, c'est probablement une requête GET
+        form = TacheForm()  # Nous créons un formulaire vide
+
+    return render(request, "tache_form.html", {'form':form, 'datetime': timezone.now()})
 
 
 
@@ -123,7 +173,51 @@ def nouvelleue(request):
 # Mise à jour UE
 
 
+class UpdateUeView(UpdateView):
+
+    model = Ue
+    template_name = 'edit_ue.html'
+    #fields = ('first_name','last_name')
+    form_class = forms.UeForm
+
+    def get_success_url(self):
+        return reverse('ues')
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateUeView, self).get_context_data(**kwargs)
+        context['action'] = reverse('ue-edit', kwargs={'pk': self.get_object().id})
+        return context
+
+
+
+
 # Effacer UE
+
+class DeleteUeView(DeleteView):
+
+    model = Ue
+    template_name = 'ue_delete.html'
+
+    def get_success_url(self):
+        return reverse('ues')
+
+
+# Formulaire UE
+
+def ue_form(request,pk):
+
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = UeForm(request.POST)  # Nous reprenons les données
+
+        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+            form.save()
+            return HttpResponseRedirect('ue',{'datetime': timezone.now()})
+
+    else: # Si ce n'est pas du POST, c'est probablement une requête GET
+        form = UeForm()  # Nous créons un formulaire vide
+
+    return render(request, "ue_form.html", {'form':form, 'datetime': timezone.now()})
+
 
 
 #-----------------------------------------------
@@ -184,52 +278,35 @@ def nouvelens(request):
     return render(request, "ens_form.html",{'datetime': timezone.now()})
 
 
-
-#-------------------------------------------------------------------------------------------
-#-------------------------------------------------------------------------------------------
-#-------------------------------------------------------------------------------------------
+# Mise à jour enseignant
 
 
+class UpdateEnseignantView(UpdateView):
+
+    model = Enseignant
+    template_name = 'edit_enseignant.html'
+    form_class = forms.EnseignantForm
+
+    def get_success_url(self):
+        return reverse('enseignants')
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateEnseignantView, self).get_context_data(**kwargs)
+        context['action'] = reverse('enseignant-edit', kwargs={'pk': self.get_object().id})
+        return context
+
+# Effacer un enseignant
+
+class DeleteEnseignantView(DeleteView):
+
+    model = Enseignant
+    template_name = 'enseignant_delete.html'
+
+    def get_success_url(self):
+        return reverse('enseignants')
 
 
-
-
-#-----------------------------------------------
-# Formulaires
-
-
-def tache_form(request,pk):
-    if request.method == 'POST':  # S'il s'agit d'une requête POST
-        form = TacheForm(request.POST)  # Nous reprenons les données
-
-        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
-            form.save()
-            return HttpResponseRedirect('taches',{'datetime': timezone.now()})
-
-    else: # Si ce n'est pas du POST, c'est probablement une requête GET
-        form = TacheForm()  # Nous créons un formulaire vide
-
-    return render(request, "tache_form.html", {'form':form, 'datetime': timezone.now()})
-
-
-
-
-
-def ue_form(request,pk):
-
-    if request.method == 'POST':  # S'il s'agit d'une requête POST
-        form = UeForm(request.POST)  # Nous reprenons les données
-
-        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
-            form.save()
-            return HttpResponseRedirect('ue',{'datetime': timezone.now()})
-
-    else: # Si ce n'est pas du POST, c'est probablement une requête GET
-        form = UeForm()  # Nous créons un formulaire vide
-
-    return render(request, "ue_form.html", {'form':form, 'datetime': timezone.now()})
-
-
+# formulaire enseignant
 
 def ens_form(request,pk):
     return render(request, "ens_form.html", {'ens': Enseignant.objects.get(id=pk) , 'datetime': timezone.now()})
@@ -238,73 +315,34 @@ def ens_form(request,pk):
 
 
 
+#-------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------
 
 
 
-
-
-
-#---------------------
-# Edit
-
-
-
-
-class UpdateTacheView(UpdateView):
-
-    model = Tache
-    template_name = 'edit_tache.html'
-    #fields = ('first_name','last_name')
-    form_class = forms.TacheForm
-
-    def get_success_url(self):
-        return reverse('taches')
-
-    def get_context_data(self, **kwargs):
-        context = super(UpdateTacheView, self).get_context_data(**kwargs)
-        context['action'] = reverse('tache-edit', kwargs={'pk': self.get_object().id})
-        return context
-
-
-class UpdateUeView(UpdateView):
-
-    model = Ue
-    template_name = 'edit_ue.html'
-    #fields = ('first_name','last_name')
-    form_class = forms.UeForm
-
-    def get_success_url(self):
-        return reverse('ues')
-
-    def get_context_data(self, **kwargs):
-        context = super(UpdateUeView, self).get_context_data(**kwargs)
-        context['action'] = reverse('ue-edit', kwargs={'pk': self.get_object().id})
-        return context
 
 
 
 #-----------------------------------------------
-# Delete
 
 
-from django.views.generic import DeleteView
-class DeleteTacheView(DeleteView):
 
-    model = Tache
-    template_name = 'tache_delete.html'
 
-    def get_success_url(self):
-        return reverse('taches')
 
-#-----------------------------------------------
-# Detail
-       
 
-from django.views.generic import DetailView
-class TacheView(DetailView):
 
-    model = Tache
-    template_name = 'tache.html'
-    exclude = ()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
