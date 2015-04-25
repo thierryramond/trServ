@@ -16,15 +16,15 @@ urlpatterns = [
     url(r'^enseignant/delete/(?P<pk>\d+)$', views.DeleteEnseignantView.as_view(), name='enseignant-delete'),
     
     url(r'^taches/$', views.liste_taches, name='taches'),
-    url(r'^tache/(?P<pk>\d+$)$', views.TacheDetailView.as_view(),name='tache-view'),
-    url(r'^tache_form/$', views.tache_form,  name= 'tache_form'),
-    url(r'^tache/filter$', views.CreateTacheView.as_view(), name='tache-filter'),
+    url(r'^tache/(?P<pk>\d+$)$', views.TacheDetailView.as_view(),name='tache-view'),  
     url(r'^tache/new$', views.CreateTacheView.as_view(), name='tache-new'),
-    url(r'^tache/edit/(?P<pk>\d+)/$', views.UpdateTacheView.as_view(), name='tache-edit',),
+    url(r'^tache/update/(?P<pk>\d+)/$', views.UpdateTacheView.as_view(), name='tache-edit',),
     url(r'^tache/delete/(?P<pk>\d+)/$', views.DeleteTacheView.as_view(), name='tache-delete',),
-
+    
     url(r'^ues/$', views.liste_ue, name='ues'),
-    url(r'^ue/(?P<pk>.+$)', views.UpdateUeView.as_view(), name ='ue-edit'),
-    url(r'^ue_new/$', views.CreateUeView.as_view(), name='ue-new'),
+    url(r'^ue/(?P<pk>\d+)$', views.ue_form, name='ue-view'),
+    url(r'^ue/new$', views.CreateUeView.as_view(), name='ue-new'),
+    url(r'^ue/update/(?P<pk>.+$)', views.UpdateUeView.as_view(), name ='ue-edit'),
+    url(r'^ue/delete/(?P<pk>.+$)', views.DeleteUeView.as_view(), name ='ue-delete'),
 
     ]

@@ -124,13 +124,16 @@ def liste_ue(request):
 
 # Affichage une UE
 
-def une_ue(request,pk):
-    return render(request, "une_ue.html", {'ue': Ue.objects.get(id=pk),'datetime': timezone.now()})
+class UeDetailView(generic.DetailView):
 
-
-class ue_detail(generic.DetailView):
     model = Ue
     template_name = 'ue_detail.html'
+    exclude = ()
+
+    def get_context_data(self, **kwargs):
+        context = super(UeDetailView, self).get_context_data(**kwargs)
+        context['datetime'] = timezone.now()
+        return context
 
 # Creation UE
 
@@ -139,7 +142,7 @@ class CreateUeView(CreateView):
     model = Ue
     template_name = 'edit_ue.html'
     form_class = UeForm
-    
+
 
     def get_success_url(self):
         return reverse('ues')
@@ -149,19 +152,6 @@ class CreateUeView(CreateView):
         context['action'] = reverse('ue-new')
         context['datetime'] = timezone.now()
         return context
-
-
-def nouvelleue(request):
-    if request.method == 'POST':  # S'il s'agit d'une requête POST
-        form = UeForm(request.POST)  # Nous reprenons les données
-
-        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
-            form.save()
-
-    else: # Si ce n'est pas du POST, c'est probablement une requête GET
-        form = UeForm()  # Nous créons un formulaire vide
-
-    return render(request, "ue_form.html", {'datetime': timezone.now()})
 
 
 # Mise à jour UE
