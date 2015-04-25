@@ -177,3 +177,12 @@ nav a:hover{
 	background-color: rgba(0, 156, 120,.5);
 	text-decoration: none;
 }
+
+bouton a{
+	display: inline-block;
+	height: 22px;
+	margin: 20px;
+	padding: 10px;
+	background-color: rgba(0, 68, 136,1);
+	color: rgba(255,255,255,1);
+}

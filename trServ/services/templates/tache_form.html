@@ -8,7 +8,8 @@
 <form action="/tache_form/" method="post">
     {% csrf_token %}
     {{ form }}
-    {{ form.horaire_eqtd = Tache.calcul_eqtd }}
+    {{ Tache.calcul_eqtd }}
+    {{ form.attribué_à__total_attribue_1}}
     <br><br>
 
     <input type="submit" value="enregistrer" />

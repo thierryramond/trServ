@@ -101,7 +101,7 @@ class Tache(models.Model):
     millesime = models.IntegerField(default=timezone.now().year)
 
     def calcul_eqtd(self):
-        if self.nature == 'intégré': self.horaire_eqtd = self.horaire_reel*1.25
+        if self.nature == 'Intégré': self.horaire_eqtd = self.horaire_reel*1.25
         elif self.nature == 'Cours': self.horaire_eqtd = self.horaire_reel*1.5
         else :  self.horaire_eqtd = self.horaire_reel
         self.save()
