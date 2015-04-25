@@ -10,9 +10,11 @@ urlpatterns = [
     url(r'^accueil/', views.home, name='home'),
 
     url(r'^enseignants/$', views.liste_enseignants, name ='enseignants'),
+    url(r'^enseignant/(?P<pk>\d+)$', views.un_enseignant, name='enseignant-view'),
     url(r'^enseignant/new$', views.CreateEnseignantView.as_view(), name='enseignant-new'),
-    url(r'^enseignant/(?P<pk>\d+$)', views.un_enseignant, name='enseignant'),
-
+    url(r'^enseignant/update/(?P<pk>\d+)$', views.UpdateEnseignantView.as_view(), name='enseignant-edit'),
+    url(r'^enseignant/delete/(?P<pk>\d+)$', views.DeleteEnseignantView.as_view(), name='enseignant-delete'),
+    
     url(r'^taches/$', views.liste_taches, name='taches'),
     url(r'^tache/(?P<pk>\d+$)$', views.UpdateTacheView.as_view(),name='tache-view'),
     url(r'^tache_form/$', views.tache_form,  name= 'tache_form'),
