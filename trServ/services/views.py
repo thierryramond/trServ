@@ -1,11 +1,15 @@
 from django.shortcuts import render
 from django.utils import timezone
 from django.http import HttpResponseRedirect
-
+from django.core.urlresolvers import reverse
 
 from django.views import generic
+from django.views.generic import CreateView, DetailView, DeleteView, UpdateView
+
 from .models import Enseignant, Tache, Ue
 from .forms import EnseignantForm, UeForm, TacheForm
+from services import forms
+
 
 
 #-------------------------------------------------------------------------------------------
@@ -40,6 +44,28 @@ class tache_detail(generic.DetailView):
         context['timezone'] = timezone.now()
         return context
 
+# Creation d'une tache
+
+class CreateTacheView(CreateView):
+    model = Tache
+    template_name = 'edit_tache.html'
+    form_class = TacheForm
+
+    def get_success_url(self):
+        return reverse('taches')
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateTacheView, self).get_context_data(**kwargs)
+        context['action'] = reverse('tache-new')
+        context['datetime'] = timezone.now()
+        return context
+
+
+# Mise à jour d'une tache
+
+# Effacer une tache
+
+
 
 #-------------------------------------------------------------------------------------------
 # UEs
@@ -52,7 +78,52 @@ def liste_ue(request):
     liste_ue = Ue.objects.order_by(order_by)
     return render(request, 'ues.html',{'datetime': timezone.now(), 'Ue' : liste_ue})
 
+# Affichage une UE
 
+def une_ue(request,pk):
+    return render(request, "une_ue.html", {'ue': Ue.objects.get(id=pk),'datetime': timezone.now()})
+
+
+class ue_detail(generic.DetailView):
+    model = Ue
+    template_name = 'ue_detail.html'
+
+# Creation UE
+
+
+class CreateUeView(CreateView):
+    model = Ue
+    template_name = 'edit_ue.html'
+    form_class = UeForm
+    
+
+    def get_success_url(self):
+        return reverse('ues')
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateUeView, self).get_context_data(**kwargs)
+        context['action'] = reverse('ue-new')
+        context['datetime'] = timezone.now()
+        return context
+
+
+def nouvelleue(request):
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = UeForm(request.POST)  # Nous reprenons les données
+
+        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+            form.save()
+
+    else: # Si ce n'est pas du POST, c'est probablement une requête GET
+        form = UeForm()  # Nous créons un formulaire vide
+
+    return render(request, "ue_form.html", {'datetime': timezone.now()})
+
+
+# Mise à jour UE
+
+
+# Effacer UE
 
 
 #-----------------------------------------------
@@ -77,27 +148,50 @@ def liste_enseignants(request):
 
 
 
-
-
-
-
-def une_ue(request,pk):
-	return render(request, "une_ue.html", {'ue': Ue.objects.get(id=pk),'datetime': timezone.now()})
+# Affichage un enseignant
 
 def un_enseignant(request,pk):
-	return render(request, "un_ens.html", {'ens': Enseignant.objects.filter(id=pk)[0], 'datetime': timezone.now()})
+    return render(request, "un_ens.html", {'ens': Enseignant.objects.filter(id=pk)[0], 'datetime': timezone.now()})
+
+# Creer un enseignant
 
 
-class ue_detail(generic.DetailView):
-    model = Ue
-    template_name = 'ue_detail.html'
+class CreateEnseignantView(CreateView):
+    model = Enseignant
+    template_name = 'edit_enseignant.html'
+    form_class = EnseignantForm
+
+    def get_success_url(self):
+        return reverse('enseignants')
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateEnseignantView, self).get_context_data(**kwargs)
+        context['action'] = reverse('enseignant-new')
+        context['datetime'] = timezone.now()
+        return context
 
 
-def une_ue(request,pk):
-	return render(request, "une_ue.html", {'ue': Ue.objects.get(id=pk),'datetime': timezone.now()})
+def nouvelens(request):
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = EnseignantForm(request.POST)  # Nous reprenons les données
 
-def un_enseignant(request,pk):
-	return render(request, "un_ens.html", {'ens': Enseignant.objects.filter(id=pk)[0], 'datetime': timezone.now()})
+        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+            form.save()
+
+    else: # Si ce n'est pas du POST, c'est probablement une requête GET
+        form = EnseignantForm()  # Nous créons un formulaire vide
+
+    return render(request, "ens_form.html",{'datetime': timezone.now()})
+
+
+
+#-------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------
+
+
+
+
 
 
 #-----------------------------------------------
@@ -141,30 +235,6 @@ def ens_form(request,pk):
     return render(request, "ens_form.html", {'ens': Enseignant.objects.get(id=pk) , 'datetime': timezone.now()})
 
 
-def nouvelens(request):
-	if request.method == 'POST':  # S'il s'agit d'une requête POST
-		form = EnseignantForm(request.POST)  # Nous reprenons les données
-
-		if form.is_valid(): # Nous vérifions que les données envoyées sont valides
-			form.save()
-
-	else: # Si ce n'est pas du POST, c'est probablement une requête GET
-		form = EnseignantForm()  # Nous créons un formulaire vide
-
-	return render(request, "ens_form.html",{'datetime': timezone.now()})
-
-
-def nouvelleue(request):
-	if request.method == 'POST':  # S'il s'agit d'une requête POST
-		form = UeForm(request.POST)  # Nous reprenons les données
-
-		if form.is_valid(): # Nous vérifions que les données envoyées sont valides
-			form.save()
-
-	else: # Si ce n'est pas du POST, c'est probablement une requête GET
-		form = UeForm()  # Nous créons un formulaire vide
-
-	return render(request, "ue_form.html", {'datetime': timezone.now()})
 
 
 
@@ -172,60 +242,12 @@ def nouvelleue(request):
 
 
 
-#-----------------------------------------------
-# Create
-from django.core.urlresolvers import reverse
-from django.views.generic import CreateView
 
-
-class CreateEnseignantView(CreateView):
-    model = Enseignant
-    template_name = 'edit_enseignant.html'
-    form_class = EnseignantForm
-
-    def get_success_url(self):
-        return reverse('enseignants')
-
-    def get_context_data(self, **kwargs):
-        context = super(CreateEnseignantView, self).get_context_data(**kwargs)
-        context['action'] = reverse('enseignant-new')
-        context['datetime'] = timezone.now()
-        return context
-
-class CreateTacheView(CreateView):
-    model = Tache
-    template_name = 'edit_tache.html'
-    form_class = TacheForm
-
-    def get_success_url(self):
-        return reverse('taches')
-
-    def get_context_data(self, **kwargs):
-        context = super(CreateTacheView, self).get_context_data(**kwargs)
-        context['action'] = reverse('tache-new')
-        context['datetime'] = timezone.now()
-        return context
-
-class CreateUeView(CreateView):
-    model = Ue
-    template_name = 'edit_ue.html'
-    form_class = UeForm
-    
-
-    def get_success_url(self):
-        return reverse('ues')
-
-    def get_context_data(self, **kwargs):
-        context = super(CreateUeView, self).get_context_data(**kwargs)
-        context['action'] = reverse('ue-new')
-        context['datetime'] = timezone.now()
-        return context
 
 #---------------------
 # Edit
 
-from django.views.generic import UpdateView
-from services import forms
+
 
 
 class UpdateTacheView(UpdateView):
