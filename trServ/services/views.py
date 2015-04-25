@@ -35,21 +35,15 @@ def liste_taches(request):
 
 # Affichage d'une tache 
 
-class TacheView(DetailView):
+class TacheDetailView(generic.DetailView):
 
-    model = Tache
-    template_name = 'tache.html'
-    exclude = ()
-
-
-
-class tache_detail(generic.DetailView):
     model = Tache
     template_name = 'tache_detail.html'
+    exclude = ()
 
     def get_context_data(self, **kwargs):
-        context = super(tache_detail, self).get_context_data(**kwargs)
-        context['timezone'] = timezone.now()
+        context = super(TacheDetailView, self).get_context_data(**kwargs)
+        context['datetime'] = timezone.now()
         return context
 
 # Creation d'une tache

@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^enseignant/delete/(?P<pk>\d+)$', views.DeleteEnseignantView.as_view(), name='enseignant-delete'),
     
     url(r'^taches/$', views.liste_taches, name='taches'),
-    url(r'^tache/(?P<pk>\d+$)$', views.UpdateTacheView.as_view(),name='tache-view'),
+    url(r'^tache/(?P<pk>\d+$)$', views.TacheDetailView.as_view(),name='tache-view'),
     url(r'^tache_form/$', views.tache_form,  name= 'tache_form'),
     url(r'^tache/filter$', views.CreateTacheView.as_view(), name='tache-filter'),
     url(r'^tache/new$', views.CreateTacheView.as_view(), name='tache-new'),
