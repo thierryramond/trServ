@@ -5,10 +5,12 @@
 {% block content %}
 
 
-<h1>{{ens}}</h1>
+<h1>{{enseignant}}</h1>
+
+
 <br><br>
-
-
+<a href="{% url 'enseignant-edit' enseignant.id %}">Modifier</a>
+<a href="{% url 'enseignant-delete' enseignant.id %}">Effacer</a>
 
 <table>
 <tr>
@@ -25,28 +27,28 @@
 </tr>
 <tr>
 	<td>
-		<a>{{ens.prenom }}</a>
+		<a>{{enseignant.prenom }}</a>
 	</td>
 	<td>
-	 {{ens.nom}}
+	 {{enseignant.nom}}
 	</td>	
 	<td>
-		{{ens.grade}}
+		{{enseignant.grade}}
 	</td>
 	<td>
-		{{ens.arrivé_en}}
+		{{enseignant.arrivé_en}}
 	</td>
 	<td>
-		{{ens.service_du}}
+		{{enseignant.service_du}}
 	</td>
 	<td>
-		{{ens.decharge}}
+		{{enseignant.decharge}}
 	</td>
 	<td>
-		{{ens.total_attribue}}
+		{{enseignant.total_attribue}}
 	</td>
 	<td>
-		{{ens.calcul_bilan}}
+		{{enseignant.calcul_bilan}}
 	</td>
 </tr>
 </table>

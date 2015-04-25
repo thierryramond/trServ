@@ -229,7 +229,7 @@ def liste_enseignants(request):
 # Affichage un enseignant
 
 def un_enseignant(request,pk):
-    return render(request, "un_ens.html", {'ens': Enseignant.objects.filter(id=pk)[0], 'datetime': timezone.now()})
+    return render(request, "un_ens.html", {'enseignant': Enseignant.objects.get(id=pk), 'datetime': timezone.now()})
 
 # Creer un enseignant
 

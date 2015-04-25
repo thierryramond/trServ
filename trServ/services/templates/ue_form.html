@@ -8,7 +8,7 @@
 <h1>Nouvelle UE</h1>
 {% endif %}
 
-<form action={{ action }} method="post">
+<form action= {{ action }} method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="enregistrer" />

@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^index', views.home, name='home'),
     url(r'^accueil/', views.home, name='home'),
 
+    url(r'^admin/', views.home, name='admin'),
+
     url(r'^enseignants/$', views.liste_enseignants, name ='enseignants'),
     url(r'^enseignant/(?P<pk>\d+)$', views.un_enseignant, name='enseignant-view'),
     url(r'^enseignant/new$', views.CreateEnseignantView.as_view(), name='enseignant-new'),

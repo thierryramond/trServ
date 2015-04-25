@@ -13,14 +13,14 @@ class Enseignant(models.Model):
     service_du = models.IntegerField (default = 192)
     decharge = models.IntegerField (default = 0)
     commentaire = models.CharField(max_length = 255, blank= True)
-    arrivé_en = models.DateField(blank=True)
+    arrivé_en = models.DateField(default='2000-09-01')
     photo = models.ImageField(blank=True)
     attribué = models.IntegerField (default = 0)
     bilan = models.IntegerField (default = 0)
-    millesime = models.IntegerField (default = 0)
+    millesime = models.IntegerField (default = timezone.now().year)
 
     class Meta():
-        unique_together = ("nom", "prenom","millesime")
+        unique_together = ("nom", "prenom", "millesime")
 
     def __str__(self):
         return ('{1} {0}'.format(self.nom, self.prenom))
@@ -84,7 +84,7 @@ class Ue(models.Model):
         return reverse('ue-view', kwargs={'pk': self.id})
 
     class Meta():
-        unique_together = ( 'code','millesime')
+        unique_together = ( 'code', 'millesime')
 
 
 nature_tache = (('TD','TD'),('Cours','Cours'),('Intégré','Intégré'),('TP','TP'),)

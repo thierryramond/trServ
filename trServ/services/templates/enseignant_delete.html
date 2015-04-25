@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Effacer un Enseignant</h1>
+
+<p>Voulez vous vraiment effacer {{ enseignant }}?</p>
+
+<form action="{% url "enseignant-delete" pk=enseignant.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Oui, effacer." />
+  <a href="{% url "enseignants" %}">Annuler.</a>
+</form>
+
+{% endblock %}

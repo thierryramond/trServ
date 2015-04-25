@@ -36,8 +36,8 @@
 </form>
 
 {% if tache.id %}
-<a href="{% url "enseignant-edit" pk=tache.id %}">Modifier</a>
-<a href="{% url "enseignant-delete" pk=contact.id %}">Effacer</a>
+<a href="{% url 'enseignant-edit' pk=tache.id %}">Modifier</a>
+<a href="{% url 'enseignant-delete' pk=contact.id %}">Effacer</a>
 {% endif %}
 
 <a href="{% url "enseignants" %}">retour à la liste</a>
