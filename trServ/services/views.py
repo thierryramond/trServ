@@ -31,7 +31,7 @@ def home(request):
 def liste_taches(request):
     order_by = request.GET.get('order_by', 'ue')
     liste = Tache.objects.all().order_by(order_by)
-    return render(request, 'taches.html',{'datetime': timezone.now(), 'Taches' : liste})
+    return render(request, 'tache_list.html',{'datetime': timezone.now(), 'Taches' : liste})
 
 # Affichage d'une tache 
 
@@ -50,7 +50,7 @@ class TacheDetailView(generic.DetailView):
 
 class CreateTacheView(CreateView):
     model = Tache
-    template_name = 'edit_tache.html'
+    template_name = 'tache_edit.html'
     form_class = TacheForm
 
     def get_success_url(self):
@@ -68,8 +68,7 @@ class CreateTacheView(CreateView):
 class UpdateTacheView(UpdateView):
 
     model = Tache
-    template_name = 'edit_tache.html'
-    #fields = ('first_name','last_name')
+    template_name = 'tache_edit.html'
     form_class = forms.TacheForm
 
     def get_success_url(self):
@@ -120,7 +119,7 @@ def tache_form(request,pk):
 def liste_ue(request):
     order_by = request.GET.get('order_by', 'année')
     liste_ue = Ue.objects.order_by(order_by)
-    return render(request, 'ues.html',{'datetime': timezone.now(), 'Ue' : liste_ue})
+    return render(request, 'ue_list.html',{'datetime': timezone.now(), 'Ue' : liste_ue})
 
 # Affichage une UE
 
@@ -140,7 +139,7 @@ class UeDetailView(generic.DetailView):
 
 class CreateUeView(CreateView):
     model = Ue
-    template_name = 'edit_ue.html'
+    template_name = 'ue_edit.html'
     form_class = UeForm
 
 
@@ -160,7 +159,7 @@ class CreateUeView(CreateView):
 class UpdateUeView(UpdateView):
 
     model = Ue
-    template_name = 'edit_ue.html'
+    template_name = 'ue_edit.html'
     #fields = ('first_name','last_name')
     form_class = forms.UeForm
 
@@ -222,7 +221,7 @@ class EnseignantListView(generic.ListView):
 def liste_enseignants(request):
 	order_by = request.GET.get('order_by', 'bilan')
 	liste_ens = Enseignant.objects.order_by(order_by)
-	return render(request, 'enseignants.html',{'datetime': timezone.now(), 'Enseignants' : liste_ens})
+	return render(request, 'enseignant_list.html',{'datetime': timezone.now(), 'Enseignants' : liste_ens})
 
 
 
@@ -231,12 +230,24 @@ def liste_enseignants(request):
 def un_enseignant(request,pk):
     return render(request, "un_ens.html", {'enseignant': Enseignant.objects.get(id=pk), 'datetime': timezone.now()})
 
+class EnseignantDetailView(CreateView):
+
+    model = Enseignant
+    template_name = 'enseignant_detail.html'
+    fields=('nom','prenom')
+
+
+    def get_context_data(self, **kwargs):
+        context = super(EnseignantDetailView, self).get_context_data(**kwargs)
+        context['datetime'] = timezone.now()
+        return context
+
 # Creer un enseignant
 
 
 class CreateEnseignantView(CreateView):
     model = Enseignant
-    template_name = 'edit_enseignant.html'
+    template_name = 'enseignant_edit.html'
     form_class = EnseignantForm
 
     def get_success_url(self):

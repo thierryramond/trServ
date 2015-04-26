@@ -35,9 +35,13 @@
 <input id="save_enseignant" type="submit" value="Enregistrer" />
 </form>
 
-{% if tache.id %}
-<a href="{% url 'enseignant-edit' pk=tache.id %}">Modifier</a>
-<a href="{% url 'enseignant-delete' pk=contact.id %}">Effacer</a>
+{% if enseignant.id %}
+<bouton>
+<a href="{% url 'enseignant-edit' pk=enseignant.id %}">Modifier</a>
+</bouton>
+<bouton>
+<a href="{% url 'enseignant-delete' pk=enseignant.id %}">Effacer</a>
+</bouton>
 {% endif %}
 
 <a href="{% url "enseignants" %}">retour à la liste</a>

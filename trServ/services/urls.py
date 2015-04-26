@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^admin/', views.home, name='admin'),
 
     url(r'^enseignants/$', views.liste_enseignants, name ='enseignants'),
-    url(r'^enseignant/(?P<pk>\d+)$', views.un_enseignant, name='enseignant-view'),
+    url(r'^enseignant/(?P<pk>\d+)/$', views.EnseignantDetailView.as_view(), name='enseignant-view'),
     url(r'^enseignant/new$', views.CreateEnseignantView.as_view(), name='enseignant-new'),
     url(r'^enseignant/update/(?P<pk>\d+)$', views.UpdateEnseignantView.as_view(), name='enseignant-edit'),
     url(r'^enseignant/delete/(?P<pk>\d+)$', views.DeleteEnseignantView.as_view(), name='enseignant-delete'),
@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^tache/delete/(?P<pk>\d+)/$', views.DeleteTacheView.as_view(), name='tache-delete',),
     
     url(r'^ues/$', views.liste_ue, name='ues'),
-    url(r'^ue/(?P<pk>\d+)$', views.ue_form, name='ue-view'),
+    url(r'^ue/(?P<pk>\d+)$', views.UeDetailView.as_view(), name='ue-view'),
     url(r'^ue/new$', views.CreateUeView.as_view(), name='ue-new'),
     url(r'^ue/update/(?P<pk>.+$)', views.UpdateUeView.as_view(), name ='ue-edit'),
     url(r'^ue/delete/(?P<pk>.+$)', views.DeleteUeView.as_view(), name ='ue-delete'),

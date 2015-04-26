@@ -34,14 +34,6 @@ class Enseignant(models.Model):
         self.save()
         return (self.service_du-self.decharge-att)
 
-    def total_attribue(self):
-        total = 0
-        for tache in Tache.objects.all() :
-            if tache.attribué_à == self :
-                total = total + tache.horaire_eqtd 
-        self.attribué = total
-        return ('{0}'.format(total))
-
     
     def total_attribue_1(self):
         total = Tache.objects.filter(attribué_à = self).aggregate(Sum('horaire_eqtd'))
