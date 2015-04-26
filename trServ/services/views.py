@@ -211,17 +211,26 @@ def ue_form(request,pk):
 
 class EnseignantListView(generic.ListView):
     model = Enseignant
+    template_name= 'enseignant_list.html'
 
     def get_context_data(self, **kwargs):
         context = super(EnseignantListView, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
+        context['datetime'] = timezone.now()
         return context
+
+    def get_queryset(self):
+        sort_by = self.request.GET.get('sort_by')
+        order = self.request.GET.get('order')
+        qs = super(EnseignantListView, self).get_queryset().order_by(sort_by)
+        if order == 'desc':
+            qs = qs.reverse()
+        return qs
 
 
 def liste_enseignants(request):
 	order_by = request.GET.get('order_by', 'bilan')
 	liste_ens = Enseignant.objects.order_by(order_by)
-	return render(request, 'enseignant_list.html',{'datetime': timezone.now(), 'Enseignants' : liste_ens})
+	return render(request, 'enseignant1_list.html',{'datetime': timezone.now(), 'Enseignants' : liste_ens})
 
 
 

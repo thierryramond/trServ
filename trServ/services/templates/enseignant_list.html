@@ -5,8 +5,7 @@
 {% block content %}
 
 
-
-<h1>Liste des enseignants</h1>
+<h1>Liste des Enseignants</h1>
 
 <bouton>
 <a href="{% url "enseignant-new" %}">Nouvel Enseignant</a></li>
@@ -17,15 +16,15 @@
 
 <table>
 <tr>
-	<th style="width: 5%;"> <a href="?order_by=millesime">Millesime</a></th>
-	<th style="width: 10%;"> <a href="?order_by=nom">Nom</a> </th>
-	<th style="width: 5%;"> <a href="?order_by=grade">Grade</a></th>
-	<th style="width: 5%;"> Service théorique</th>
-	<th style="width: 5%;"> <a href="?order_by=-decharge">Décharge</a> </th>
-	<th style="width: 5%;"> <a href="?order_by=-attribué">Attribué</a></th>
-	<th style="width: 5%;"> <a href="?order_by=bilan">Bilan</a></th>
+	<th style="width: 5%;"> <a href="?sort_by=millesime&order=asc">Millesime</a></th>
+	<th style="width: 10%;"> <a href="?sort_by=nom&order=asc">Nom</a> </th>
+	<th style="width: 5%;"> <a href="?sort_by=grade&order=desc">Grade</a></th>
+	<th style="width: 5%;"> <a href="?sort_by=service_du&order=desc">Service théorique</a></th>
+	<th style="width: 5%;"> <a href="?sort_by=decharge">Décharge</a> </th>
+	<th style="width: 5%;"> <a href="?sort_by=attribué">Attribué</a></th>
+	<th style="width: 5%;"> <a href="?sort_by=bilan">Bilan</a></th>
 </tr>
-{% for enseignant in Enseignants%}
+{% for enseignant in enseignant_list%}
 <tr>
 	<td>{{enseignant.millesime}}</td>
 	<td><a href="{% url 'enseignant-view' enseignant.id%}">{{enseignant.prenom }} {{enseignant.nom}}</a></td>

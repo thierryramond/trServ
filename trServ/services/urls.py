@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from .models import Tache
+
 
 
 urlpatterns = [
@@ -11,7 +11,7 @@ urlpatterns = [
 
     url(r'^admin/', views.home, name='admin'),
 
-    url(r'^enseignants/$', views.liste_enseignants, name ='enseignants'),
+    url(r'^enseignants/$', views.EnseignantListView.as_view(), name ='enseignants'),
     url(r'^enseignant/(?P<pk>\d+)/$', views.EnseignantDetailView.as_view(), name='enseignant-view'),
     url(r'^enseignant/new$', views.CreateEnseignantView.as_view(), name='enseignant-new'),
     url(r'^enseignant/update/(?P<pk>\d+)$', views.UpdateEnseignantView.as_view(), name='enseignant-edit'),
