@@ -219,11 +219,15 @@ class EnseignantListView(generic.ListView):
         return context
 
     def get_queryset(self):
-        sort_by = self.request.GET.get('sort_by')
-        order = self.request.GET.get('order')
-        qs = super(EnseignantListView, self).get_queryset().order_by(sort_by)
-        if order == 'desc':
-            qs = qs.reverse()
+        if self.request.GET.get('sort_by'):
+            sort_by = self.request.GET.get('sort_by')
+            qs = super(EnseignantListView, self).get_queryset().order_by(sort_by)
+        else:
+            qs = super(EnseignantListView, self).get_queryset()
+        
+        if self.request.GET.get('order'):
+            order = self.request.GET.get('order')
+            if order == 'desc': qs = qs.reverse()
         return qs
 
 
