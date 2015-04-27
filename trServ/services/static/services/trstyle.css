@@ -238,6 +238,17 @@ centrer{
 	justify-content: center;
 }
 
+centrer th{
+	padding-left: 10px;
+	width:200px;
+	text-align: left;
+}
+
+centrer td{
+	padding-right: 10px;
+	width:200px;
+	text-align: left;
+}
 
 form{
 	display: flex;

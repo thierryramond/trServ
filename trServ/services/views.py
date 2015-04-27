@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from django.views import generic
-from django.views.generic import CreateView, DetailView, DeleteView, UpdateView
+from django.views.generic import CreateView, DetailView, DeleteView, UpdateView,FormView
 
 from .models import Enseignant, Tache, Ue
 from .forms import EnseignantForm, UeForm, TacheForm
@@ -140,7 +140,8 @@ class UeDetailView(generic.DetailView):
 class CreateUeView(CreateView):
     model = Ue
     template_name = 'ue_edit.html'
-    fields = '__all__'
+    form_class = forms.UeForm
+
     
 
 
@@ -161,7 +162,6 @@ class UpdateUeView(UpdateView):
 
     model = Ue
     template_name = 'ue_edit.html'
-    #fields = ('first_name','last_name')
     form_class = forms.UeForm
 
     def get_success_url(self):
@@ -245,11 +245,10 @@ def liste_enseignants(request):
 def un_enseignant(request,pk):
     return render(request, "un_ens.html", {'enseignant': Enseignant.objects.get(id=pk), 'datetime': timezone.now()})
 
-class EnseignantDetailView(DetailView):
-
+class EnseignantDetailView(UpdateView):
     model = Enseignant
     template_name = 'enseignant_detail.html'
-    fields='__all__'
+    form_class = EnseignantForm
 
 
     def get_context_data(self, **kwargs):

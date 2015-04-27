@@ -50,6 +50,9 @@ class Enseignant(models.Model):
         self.save()
         return total['horaire_eqtd__sum']
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in self._meta.fields]
+
     def get_absolute_url(self):
         return reverse('enseignant-view', kwargs={'pk': self.id})
     

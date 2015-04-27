@@ -4,50 +4,34 @@
 {% block content %}
 
 
-<h1>{{ enseignant }}</h1>
+
+<h1>{{enseignant}}</h1>
 
 
-
+<centrer>
 <table>
-<tr>
-	<th style="width:10%;">Portrait</th>
-	<th style="width:20%;"> Nom</th>
-	<th style="width:10%;"> Grade</th>
-	<th style="width:10%;"> Service du</th>
-	<th style="width:10%;"> Décharge </th>
-	<th style="width:10%;"> Attribué</th>
-	<th style="width:10%;"> Bilan</th>
-	<th style="width:3%;"> Millesime</th>
-</tr>
- <tr> 
-
-    <td> <img src="{{photo}}"></td>
-	<td style="width:20%;">{{enseignant.prenom }} {{enseignant.nom}}</a>
-	</td>
-	<td>
-		{{enseignant.grade}}
-	</td>
-	<td>
-		{{enseignant.service_du}}
-	</td>
-	<td>
-		{{enseignant.decharge}}
-	</td>
-	<td>
-		{{enseignant.total_attribue_1}}
-	</td>
-	<td>
-		{{enseignant.calcul_bilan}}
-	</td>
-	<td style="width:3%;">
-		{{enseignant.millesime}}
-	</td>
-
-</tr>
-
+<tr><th>Nom :</th><td> {{enseignant.nom}}</td></tr>
+<tr><th>Prenom :</th><td> {{enseignant.prenom}}</td></tr>
+<tr><th>Grade :</th><td> {{enseignant.grade}}</td></tr>
+<tr><th>Service du :</th><td>{{enseignant.service_du}}</td></tr>
+<tr><th>Decharge :</th><td>{{enseignant.décharge}}</td></tr>
+<tr><th>Commentaire :</th><td>{{enseignant.commentaire}}</td></tr>
+<tr><th>Arrivé en :</th><td>{{enseignant.arrivée_en}}</td></tr>
+<tr><th>Photo :</th><td>{{enseignement.photo}}</td></tr>
+<tr><th>Attribué :</th><td>{{enseignement.attribué}}</td></tr>
+<tr><th>Bilan :</th><td>{{enseignant.bilan}}</td></tr>
+<tr><th>Millesime :</th><td>{{enseignant.millesime}}</td></tr>
 </table>
 
+</table>
+</centrer>
+
 <br>
+
+
+
+<br>
+<centrer>
 <bouton>
 <a href="{% url "enseignants" %}">Retour à la liste</a>
 <a href="{% url "enseignant-edit" pk=enseignant.id %}">Modifier {{enseignant}}</a>
@@ -55,5 +39,5 @@
 <bouton_rouge>
 <a href="{% url "enseignant-delete" pk=enseignant.id %}">Effacer {{enseignant}}</a>
 </bouton_rouge>
-
+</centrer>
 {% endblock %}
