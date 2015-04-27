@@ -1,33 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<nav>
-{% if ue.id %}
-<a href="{% url "ue-edit" pk=ue.id %}">
-  Modifier
-</a>
-<a href="{% url "ue-delete" pk=ue.id %}">Effacer</a>
-{% endif %}
 
-<a href="{% url "ues" %}">retour à la liste</a>
-</nav>
 
-{% if ue.id %}
-<h1>Modifier l'UE/h1>
-{% else %}
 <h1>Nouvelle UE</h1>
-{% endif %}
 
 
-<form action="{{ action }}" method="POST">
-  {% csrf_token %}
 
-<ul>
-{% for zouzou in object_list %}
-<li>zouzou.title</li>
-{% endfor %}
-</ul>
-<input id="save_ue" type="submit" value="Enregistrer" />
+<form action="" method="post">{% csrf_token %}
+    <table>{{ form.as_table}}</table>
+    <br>
+    <input type="submit" value="Créer l'UE" />
 </form>
 
 {% endblock %}

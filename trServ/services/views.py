@@ -140,7 +140,8 @@ class UeDetailView(generic.DetailView):
 class CreateUeView(CreateView):
     model = Ue
     template_name = 'ue_edit.html'
-    form_class = UeForm
+    fields = '__all__'
+    
 
 
     def get_success_url(self):
@@ -291,7 +292,7 @@ def nouvelens(request):
 class UpdateEnseignantView(UpdateView):
 
     model = Enseignant
-    template_name = 'edit_enseignant.html'
+    template_name = 'enseignant_edit.html'
     form_class = forms.EnseignantForm
 
     def get_success_url(self):
@@ -300,6 +301,7 @@ class UpdateEnseignantView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(UpdateEnseignantView, self).get_context_data(**kwargs)
         context['action'] = reverse('enseignant-edit', kwargs={'pk': self.get_object().id})
+        context['datetime'] = timezone.now()
         return context
 
 # Effacer un enseignant

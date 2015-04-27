@@ -3,8 +3,15 @@ from django.db.models import Sum
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 
+#----------------------------------------------------------------------------------------------
+# Listes
 
-# Create your models here.
+nature_tache = (('TD','TD'),('Cours','Cours'),('Intégré','Intégré'),('TP','TP'),)
+année = (('00','00'),('L1','L1'),('L2','L2'),('L3','L3'),('M1','M1'),('M2','M2'),('D','D'))
+semestre = (('S1','S1'),('S2','S2'),('S3','S3'),('S4','S4'),('S5','S5'),('S6','S6'))
+
+#----------------------------------------------------------------------------------------------
+# Table des enseignants
 
 class Enseignant(models.Model):
     nom = models.CharField(max_length = 100)
@@ -47,27 +54,30 @@ class Enseignant(models.Model):
         return reverse('enseignant-view', kwargs={'pk': self.id})
     
 
+#----------------------------------------------------------------------------------------------
+# Table des UEs
+
 class Ue(models.Model):
     titre = models.CharField(max_length = 100)
     code = models.CharField(max_length = 20)
-    année = models.CharField(max_length = 20)
-    semestre = models.CharField(max_length = 20)
-    description = models.CharField(max_length = 255)
+    année = models.CharField(max_length = 20, choices = année)
+    semestre = models.CharField(max_length = 20, choices = semestre)
+    description = models.CharField(max_length = 255, blank=True, null=True)
     responsable = models.ForeignKey(Enseignant)
-    spécialité = models.CharField(max_length = 20)
-    horaire_total = models.IntegerField()
-    horaire_cours = models.IntegerField()
-    horaire_td = models.IntegerField()
-    horaire_tp = models.IntegerField()
-    horaire_intégré = models.IntegerField()
-    horaire_soutien = models.IntegerField()
-    horaire_coordination = models.IntegerField()
-    nombre_td = models.IntegerField()
-    nombre_tp = models.IntegerField()
-    nombre_cours = models.IntegerField()
-    nombre_intégré = models.IntegerField()
-    nombre_soutien = models.IntegerField()
-    millesime = models.IntegerField()
+    spécialité = models.CharField(max_length = 20,blank=True, null=True)
+    horaire_total = models.IntegerField(default=0)
+    horaire_cours = models.IntegerField(default=0)
+    horaire_td = models.IntegerField(default=0)
+    horaire_tp = models.IntegerField(default=0)
+    horaire_intégré = models.IntegerField(default=0)
+    horaire_soutien = models.IntegerField(default=0)
+    horaire_coordination = models.IntegerField(default=0)
+    nombre_td = models.IntegerField(default=0)
+    nombre_tp = models.IntegerField(default=0)
+    nombre_cours = models.IntegerField(default=0)
+    nombre_intégré = models.IntegerField(default=0)
+    nombre_soutien = models.IntegerField(default=0)
+    millesime = models.IntegerField(default=timezone.now().year)
 
     def __str__(self):
         return ('{0} - {1}'.format(self.code, self.titre))
@@ -79,7 +89,9 @@ class Ue(models.Model):
         unique_together = ( 'code', 'millesime')
 
 
-nature_tache = (('TD','TD'),('Cours','Cours'),('Intégré','Intégré'),('TP','TP'),)
+
+#----------------------------------------------------------------------------------------------
+# Table des tache
 
 
 class Tache(models.Model):

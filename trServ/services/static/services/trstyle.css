@@ -30,13 +30,21 @@ header
 	color: rgba(100,100,100,1);
 	font-size: 1em;
 	border-top: rgba(0, 68, 136,.7) solid 0px;
-	
 }
 
 a
 {
 	color: rgba(100,100,100,1);
 	text-decoration: none;
+	font-style: bold;
+	
+}
+
+td a
+{
+	color: rgba(100,100,100,1);
+	text-decoration: underline;
+	font-style: bold;
 	
 }
 
@@ -91,7 +99,16 @@ chapeau_droit
 	padding-right: 5%;
 }
 
-
+footer{
+	display: flex;
+	display: -webkit-flex;
+	flex-flow:column;
+	-webkit-flex-flow: column;
+	align-content: flex-end;
+	-webkit-align-content:  flex-end;
+	padding-right: 20px;
+	text-align: right;
+}
 
 
 
@@ -123,13 +140,14 @@ td{
 th{
 	border: 1px solid #666;
 	width: 100px;
-	text-decoration: bold;
+	font-style: bold;
 	color:#333;
 	background-color: #0CA;
 }
 
 th a{
 	text-decoration: none;
+	font-style: bold;
 }
 
 nav
@@ -178,11 +196,42 @@ nav a:hover{
 	text-decoration: none;
 }
 
+input[type=submit]{
+	display: inline-block;
+	height: 48px;
+	margin: 10px;
+	padding: 10px;
+	font-size: 1em;
+	text-decoration: none;
+	background-color: rgba(0, 68, 136,1);
+	color: rgba(255,255,255,1);
+}
+
 bouton a{
 	display: inline-block;
 	height: 22px;
 	margin: 20px;
 	padding: 10px;
+	text-decoration: none;
 	background-color: rgba(0, 68, 136,1);
 	color: rgba(255,255,255,1);
+}
+
+bouton_rouge a{
+	display: inline-block;
+	height: 22px;
+	margin: 20px;
+	padding: 10px;
+	background-color: rgba(200, 0, 0, 1);
+	color: rgba(255,255,255,1);
+}
+
+form th{
+	padding-left: 10px;
+	width:200px;
+	text-align: left;
+}
+
+form td{
+	padding-right: 10px;
 }
