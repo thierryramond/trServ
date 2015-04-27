@@ -3,26 +3,27 @@
 {% block content %}
 
 
+{% if enseignant.id %}
+<h1>Modifier {{enseignant}}</h1>
+{% else %}
+<h1>Nouvel Enseignant</h1>
+{% endif %}
 
-<h1>Modifier l'Enseignant</h1>
 
-
-<center>
 <form action="{{ action }}" method="POST">
   {% csrf_token %}
 <table>
 {{form.as_table}}
 </table>
 
-
+{% if enseignant.id %}
 <input id="save_enseignant" type="submit" value="Modifier" />
-
-
+{% else %}
+<input id="save_enseignant" type="submit" value="Créer" />
+{% endif %}
 </form>
-</center>
 
-<bouton>
-<a href="{% url "enseignants" %}">Retour à la liste</a>
-</bouton>
+
+
 
 {% endblock %}

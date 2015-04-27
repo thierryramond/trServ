@@ -273,19 +273,6 @@ class CreateEnseignantView(CreateView):
         return context
 
 
-def nouvelens(request):
-    if request.method == 'POST':  # S'il s'agit d'une requête POST
-        form = EnseignantForm(request.POST)  # Nous reprenons les données
-
-        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
-            form.save()
-
-    else: # Si ce n'est pas du POST, c'est probablement une requête GET
-        form = EnseignantForm()  # Nous créons un formulaire vide
-
-    return render(request, "ens_form.html",{'datetime': timezone.now()})
-
-
 # Mise à jour enseignant
 
 
@@ -313,13 +300,6 @@ class DeleteEnseignantView(DeleteView):
 
     def get_success_url(self):
         return reverse('enseignants')
-
-
-# formulaire enseignant
-
-def ens_form(request,pk):
-    return render(request, "ens_form.html", {'ens': Enseignant.objects.get(id=pk) , 'datetime': timezone.now()})
-
 
 
 
