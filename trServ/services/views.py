@@ -243,12 +243,11 @@ def liste_enseignants(request):
 def un_enseignant(request,pk):
     return render(request, "un_ens.html", {'enseignant': Enseignant.objects.get(id=pk), 'datetime': timezone.now()})
 
-class EnseignantDetailView(CreateView):
+class EnseignantDetailView(DetailView):
 
     model = Enseignant
     template_name = 'enseignant_detail.html'
-    fields=('nom','prenom')
-
+    fields='__all__'
 
     def get_context_data(self, **kwargs):
         context = super(EnseignantDetailView, self).get_context_data(**kwargs)
