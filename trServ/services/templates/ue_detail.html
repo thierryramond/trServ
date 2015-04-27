@@ -2,15 +2,29 @@
 
 {% block content %}
 
+
 <h1>{{ue.code}} - {{ue.titre}}</h1>
 
 
-<form action="{{ action }}" method="POST">
-  {% csrf_token %}
-  <table>
-  {{form.as_table}}
-  </table>
-<input id="save_ue" type="submit" value="Enregistrer" />
-</form>
+<centrer>
+<table>
+  	{% for key, value in object.get_fields %}
+  	<tr>
+  	<th style="width:200px;">{{key}}</th>
+  	<td style="width:200px;"> {{ value }} </td>
+  	</tr>
+	{% endfor %}
+</table>
+</centrer>
 
+<br>
+<centrer>
+<bouton>
+<a href="{% url "ues" %}">Retour à la liste</a>
+<a href="{% url "ue-edit" pk=ue.id %}">Modifier {{ue}}</a>
+</bouton>
+<bouton_rouge>
+<a href="{% url "ue-delete" pk=ue.id %}">Effacer {{ue}}</a>
+</bouton_rouge>
+</centrer>
 {% endblock %}

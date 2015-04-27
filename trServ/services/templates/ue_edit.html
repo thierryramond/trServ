@@ -3,14 +3,25 @@
 {% block content %}
 
 
+{% if ue.id %}
+<h1>Modifier {{ue}}</h1>
+{% else %}
 <h1>Nouvelle UE</h1>
+{% endif %}
+
 
 
 
 <form action="" method="post">{% csrf_token %}
-    <table>{{ form.as_table}}</table>
-    <br>
-    <input type="submit" value="Créer l'UE" />
+    <table>
+    {{form.as_table}}
+    </table>
+	{% if ue.id %}
+	<input id="edit_ue" type="submit" value="Modifier" />
+	{% else %}
+	<input id="new_ue" type="submit" value="Créer" />
+	{% endif %}
 </form>
+
 
 {% endblock %}

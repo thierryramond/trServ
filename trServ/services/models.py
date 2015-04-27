@@ -85,6 +85,10 @@ class Ue(models.Model):
     def get_absolute_url(self):
         return reverse('ue-view', kwargs={'pk': self.id})
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in self._meta.fields]
+
+
     class Meta():
         unique_together = ( 'code', 'millesime')
 

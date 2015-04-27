@@ -127,13 +127,13 @@ class UeDetailView(generic.DetailView):
 
     model = Ue
     template_name = 'ue_detail.html'
-    exclude = ()
 
     def get_context_data(self, **kwargs):
         context = super(UeDetailView, self).get_context_data(**kwargs)
         context['datetime'] = timezone.now()
         return context
 
+    
 # Creation UE
 
 
@@ -170,6 +170,7 @@ class UpdateUeView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(UpdateUeView, self).get_context_data(**kwargs)
         context['action'] = reverse('ue-edit', kwargs={'pk': self.get_object().id})
+        context['datetime'] = timezone.now()
         return context
 
 
@@ -249,6 +250,7 @@ class EnseignantDetailView(DetailView):
     model = Enseignant
     template_name = 'enseignant_detail.html'
     fields='__all__'
+
 
     def get_context_data(self, **kwargs):
         context = super(EnseignantDetailView, self).get_context_data(**kwargs)
