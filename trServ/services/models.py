@@ -38,7 +38,6 @@ class Enseignant(models.Model):
         if att == None:
             att=0
         self.bilan = self.service_du-self.decharge-att
-        self.save()
         return (self.service_du-self.decharge-att)
 
     
@@ -46,8 +45,7 @@ class Enseignant(models.Model):
         total = Tache.objects.filter(attribué_à = self).aggregate(Sum('horaire_eqtd'))
         if (total['horaire_eqtd__sum'] == None):
             total['horaire_eqtd__sum']=0
-        self.total_attribue=total['horaire_eqtd__sum']
-        self.save()
+        self.attribué=total['horaire_eqtd__sum']
         return total['horaire_eqtd__sum']
 
     def get_fields(self):
@@ -55,7 +53,11 @@ class Enseignant(models.Model):
 
     def get_absolute_url(self):
         return reverse('enseignant-view', kwargs={'pk': self.id})
-    
+
+    def save(self):
+        self.bilan = self.calcul_bilan()
+        self.attribué = self.total_attribue_1()
+        super(Enseignant, self).save(*args, **kwargs)
 
 #----------------------------------------------------------------------------------------------
 # Table des UEs
