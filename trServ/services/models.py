@@ -21,7 +21,7 @@ class Enseignant(models.Model):
     decharge = models.IntegerField (default = 0)
     commentaire = models.CharField(max_length = 255, blank= True)
     arrivé_en = models.DateField(default='2000-09-01')
-    photo = models.ImageField(blank=True)
+    photo = models.ImageField(blank=True, upload_to='photos/%Y/%m/%d')
     attribué = models.IntegerField (default = 0)
     bilan = models.IntegerField (default = 0)
     millesime = models.IntegerField (default = timezone.now().year)
@@ -41,7 +41,7 @@ class Enseignant(models.Model):
         return (self.service_du-self.decharge-att)
 
     
-    def total_attribue_1(self):
+    def total_attribué_1(self):
         total = Tache.objects.filter(attribué_à = self).aggregate(Sum('horaire_eqtd'))
         if (total['horaire_eqtd__sum'] == None):
             total['horaire_eqtd__sum']=0
@@ -54,10 +54,10 @@ class Enseignant(models.Model):
     def get_absolute_url(self):
         return reverse('enseignant-view', kwargs={'pk': self.id})
 
-    def save(self):
+    def save(self, *args, **kwargs):
         self.bilan = self.calcul_bilan()
-        self.attribué = self.total_attribue_1()
-        super(Enseignant, self).save(*args, **kwargs)
+        self.attribue = self.total_attribué_1()
+        super(Enseignant, self).save( *args, **kwargs)
 
 #----------------------------------------------------------------------------------------------
 # Table des UEs
@@ -100,7 +100,7 @@ class Ue(models.Model):
 
 
 #----------------------------------------------------------------------------------------------
-# Table des tache
+# Table des taches
 
 
 class Tache(models.Model):
@@ -108,7 +108,7 @@ class Tache(models.Model):
     attribué_à = models.ForeignKey(Enseignant)
     nature = models.CharField(max_length = 20, choices = nature_tache)
     horaire_reel = models.IntegerField()
-    horaire_eqtd = models.IntegerField(blank = True, null = True)
+    horaire_eqtd = models.FloatField(blank = True, null = True)
     modifié_le = models. DateTimeField(auto_now = True)
     depuis = models.IntegerField(default=0)
     millesime = models.IntegerField(default=timezone.now().year)
@@ -117,10 +117,20 @@ class Tache(models.Model):
         if self.nature == 'Intégré': self.horaire_eqtd = self.horaire_reel*1.25
         elif self.nature == 'Cours': self.horaire_eqtd = self.horaire_reel*1.5
         else :  self.horaire_eqtd = self.horaire_reel
-        self.save()
         return self.horaire_eqtd
 
 
     
     def __str__(self):
         return ('{0} - {1}'.format(self.ue,  self.nature))
+
+    def save(self, *args,**kwargs):
+        # Mise a jour de l'enseignant concerné
+        self.horaire_eqtd = self.calcul_eqtd()
+        self.attribué_à.attribué= self.attribué_à.total_attribué_1()
+        self.attribué_à.bilan = self.attribué_à.calcul_bilan()
+        self.attribué_à.save()
+        # Mise à jour de l'UE concernée
+        # a faire
+        super(Tache,self).save( *args, **kwargs)
+
