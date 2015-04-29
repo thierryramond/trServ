@@ -9,21 +9,22 @@ from django.utils import timezone
 nature_tache = (('TD','TD'),('Cours','Cours'),('Intégré','Intégré'),('TP','TP'),)
 année = (('00','00'),('L1','L1'),('L2','L2'),('L3','L3'),('M1','M1'),('M2','M2'),('D','D'))
 semestre = (('S1','S1'),('S2','S2'),('S3','S3'),('S4','S4'),('S5','S5'),('S6','S6'))
-
+genre = (('M','M'),('Mme','Mme'))
 #----------------------------------------------------------------------------------------------
 # Table des enseignants
 
 class Enseignant(models.Model):
     nom = models.CharField(max_length = 100)
     prenom = models.CharField(max_length = 100)
+    genre = models.CharField(max_length = 10, choices = genre)
     grade = models.CharField(max_length = 100)
     service_du = models.IntegerField (default = 192)
     decharge = models.IntegerField (default = 0)
-    commentaire = models.CharField(max_length = 255, blank= True)
+    commentaire = models.CharField(max_length = 255, blank = True)
     arrivé_en = models.DateField(default='2000-09-01')
     photo = models.ImageField(blank=True, upload_to='photos/%Y/%m/%d')
-    attribué = models.IntegerField (default = 0)
-    bilan = models.IntegerField (default = 0)
+    attribué = models.FloatField (default = 0)
+    bilan = models.FloatField (default = 0)
     millesime = models.IntegerField (default = timezone.now().year)
 
     class Meta():
@@ -118,7 +119,6 @@ class Tache(models.Model):
         elif self.nature == 'Cours': self.horaire_eqtd = self.horaire_reel*1.5
         else :  self.horaire_eqtd = self.horaire_reel
         return self.horaire_eqtd
-
 
     
     def __str__(self):

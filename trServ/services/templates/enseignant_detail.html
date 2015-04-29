@@ -7,7 +7,7 @@
 
 <h1>{{enseignant}}</h1>
 
-<img src="{{enseignement.photo}}">
+<img src="{{enseignant.photo}}">
 
 <centrer>
 <table>
@@ -16,12 +16,12 @@
 <tr><th>Grade :</th><td> {{enseignant.grade}}</td></tr>
 <tr><th>Service du :</th><td>{{enseignant.service_du}}</td></tr>
 <tr><th>Commentaire :</th><td>{{enseignant.commentaire}}</td></tr>
-<tr><th>Arrivé en :</th><td>{{enseignant.arrivé_en}}</td></tr>
+<tr><th>{% ifequal enseignant.genre "Mme" %}Arrivée{%else%} Arrivé {% endifequal %} en :</th><td>{{enseignant.arrivé_en}}</td></tr>
 </table>
 <table>
 <tr><th>Millesime :</th><td>{{enseignant.millesime}}</td></tr>
 <tr><th>Décharge :</th><td>{{enseignant.decharge}}</td></tr>
-<tr><th>Attribué :</th><td>{{enseignant.attribué}}</td></tr>
+<tr><th>Attribuées :</th><td>{{enseignant.attribué}}</td></tr>
 <tr><th>Bilan :</th><td>{{enseignant.bilan}}</td></tr>
 </table>
 
