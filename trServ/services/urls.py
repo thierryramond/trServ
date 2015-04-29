@@ -1,5 +1,7 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
+import avatar
+
 
 
 
@@ -28,5 +30,7 @@ urlpatterns = [
     url(r'^ue/new$', views.CreateUeView.as_view(), name='ue-new'),
     url(r'^ue/update/(?P<pk>.+$)', views.UpdateUeView.as_view(), name ='ue-edit'),
     url(r'^ue/delete/(?P<pk>.+$)', views.DeleteUeView.as_view(), name ='ue-delete'),
+
+    url(r'avatar/', include('avatar.urls')),
 
     ]

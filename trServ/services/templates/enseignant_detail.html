@@ -3,13 +3,14 @@
 
 {% block content %}
 
-
+{% load avatar_tags %}
 
 <h1>{{enseignant}}</h1>
 
-<img src="{{enseignant.photo}}">
+
 
 <centrer>
+{% avatar  enseignant %}
 <table>
 <tr><th>Nom :</th><td> {{enseignant.nom}}</td></tr>
 <tr><th>Prenom :</th><td> {{enseignant.prenom}}</td></tr>
